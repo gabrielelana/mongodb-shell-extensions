@@ -1,0 +1,27 @@
+{
+  "name": "mongodb-shell-extensions",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gabrielelana/mongodb-shell-extensions",
+  "authors": [
+    "gabriele.lana <gabriele.lana@cleancode.it>"
+  ],
+  "description": "Useful MongoDB shell extensions",
+  "keywords": [
+    "mongodb",
+    "shell",
+    "extensions"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "momentjs": "~2.5.0",
+    "lodash": "~2.4.1"
+  }
+}

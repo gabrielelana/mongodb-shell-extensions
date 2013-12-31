@@ -1,0 +1,28 @@
+{
+  "name": "mongodb-shell-extensions",
+  "version": "0.0.1",
+  "description": "Useful MongoDB shell extensions",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabrielelana/mongodb-shell-extensions.git"
+  },
+  "keywords": [
+    "mongodb",
+    "shell",
+    "extensions"
+  ],
+  "author": "gabriele.lana <gabriele.lana@cleancode.it>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-bower-concat": "~0.2.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-attention": "0.0.3"
+  }
+}
