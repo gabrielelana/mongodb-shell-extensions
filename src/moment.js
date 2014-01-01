@@ -4,6 +4,10 @@ moment.today = function() {return moment().startOf('day')}
 moment.now = function() {return moment()}
 moment.tomorrow = function() {return moment().add(1, 'day').startOf('day')}
 
+moment.$today = function() {
+  return moment.$between(moment.today())
+}
+
 moment.$between = function(fromTime, toTime) {
   toTime = toTime || moment.now()
   return {
