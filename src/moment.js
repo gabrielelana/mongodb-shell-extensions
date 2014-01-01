@@ -1,8 +1,8 @@
 
-moment.yesterday = function() {return moment().subtract(1, 'day').startOf('day')}
-moment.today = function() {return moment().startOf('day')}
-moment.now = function() {return moment()}
-moment.tomorrow = function() {return moment().add(1, 'day').startOf('day')}
+moment.yesterday = function() {return moment.utc().subtract(1, 'day').startOf('day')}
+moment.today = function() {return moment.utc().startOf('day')}
+moment.now = function() {return moment.utc()}
+moment.tomorrow = function() {return moment.utc().add(1, 'day').startOf('day')}
 
 moment.$today = function() {
   return moment.$between(moment.today())
