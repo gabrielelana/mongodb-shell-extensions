@@ -40,6 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-attention')
 
   // TODO: jshint
+  // TODO: automatic tests
   grunt.registerTask('build', ['clean', 'bower_concat', 'concat'])
   grunt.registerTask('install', ['build','copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
