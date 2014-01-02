@@ -1,0 +1,31 @@
+{
+  "globals": {
+    "it": false,
+    "console": false,
+    "process": false,
+    "describe": false,
+    "context": false,
+    "expect": true,
+    "beforeEach": false,
+    "afterEach": false,
+    "before": false,
+    "after": false
+  },
+  "evil": true,
+  "node": true,
+  "browser": true,
+  "asi": true,
+  "strict": false,
+  "eqeqeq": true,
+  "latedef": false,
+  "immed": true,
+  "undef": true,
+  "unused": false,
+  "trailing": true,
+  "funcscope": true,
+  "camelcase": true,
+  "quotmark": "single",
+  "curly": true,
+  "expr": true,
+  "sub": true
+}
