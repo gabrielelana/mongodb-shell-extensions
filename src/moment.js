@@ -11,8 +11,15 @@ moment.$today = function() {
 moment.$between = function(fromTime, toTime) {
   toTime = toTime || moment.now()
   return {
-    '$gte': fromTime.toDate(), 
+    '$gte': fromTime.toDate(),
     '$lte': toTime.toDate()
+  }
+}
+
+moment.$inDay = function(aDay) {
+  return {
+    '$gte': moment(aDay).startOf('day').toDate(),
+    '$lte': moment(aDay).endOf('day').toDate()
   }
 }
 
