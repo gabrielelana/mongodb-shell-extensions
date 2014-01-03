@@ -67,6 +67,11 @@ moment.$inDay = function(aDay) {
     return moment().range(momentInTime.clone().subtract(this), momentInTime)
   }
 
+  Duration.prototype.toString = Duration.prototype.humanize
+  Duration.prototype.tojson = function() {
+    return '"' + this.toString.apply(this, arguments) + '"'
+  }
+
 })(moment.duration().constructor)
 
 
