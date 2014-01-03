@@ -40,6 +40,15 @@ moment.$inDay = function(aDay) {
 })()
 
 
+;(function(Moment) {
+
+  Moment.prototype.tojson = function() {
+    return '"' + this.clone().utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]') + '"'
+  }
+
+})(moment().constructor)
+
+
 ;(function(Duration) {
 
   Duration.prototype.startingNow = function() {
