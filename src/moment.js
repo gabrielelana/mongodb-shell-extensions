@@ -38,3 +38,26 @@ moment.$inDay = function(aDay) {
   Number.prototype.minutes = Number.prototype.minute = function() {return applyLater(moment.duration(this.valueOf(), 'minutes'))}
   Number.prototype.seconds = Number.prototype.second = function() {return applyLater(moment.duration(this.valueOf(), 'seconds'))}
 })()
+
+
+;(function(Duration) {
+
+  Duration.prototype.startingAt = function(momentInTime) {
+    return moment().range(momentInTime, momentInTime.clone().add(this))
+  }
+
+  Duration.prototype.endingAt = function(momentInTime) {
+    return moment().range(momentInTime.clone().subtract(this), momentInTime)
+  }
+
+})(moment.duration().constructor)
+
+
+;(function(DateRange) {
+  
+  DateRange.prototype.each = function(duration, callback) {
+    duration = (typeof duration === 'string') ? moment.duration(1, duration) : duration
+    this.by(duration.startingAt(this.start), callback)
+  }
+
+})(moment().range().constructor)
