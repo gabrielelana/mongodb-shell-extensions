@@ -42,6 +42,14 @@ moment.$inDay = function(aDay) {
 
 ;(function(Duration) {
 
+  Duration.prototype.startingNow = function() {
+    return this.startingAt(moment.now())
+  }
+
+  Duration.prototype.endingNow = function() {
+    return this.endingAt(moment.now())
+  }
+
   Duration.prototype.startingAt = function(momentInTime) {
     return moment().range(momentInTime, momentInTime.clone().add(this))
   }
