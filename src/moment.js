@@ -1,3 +1,4 @@
+/* global _:true */
 
 moment.yesterday = function() {return moment.utc().subtract(1, 'day').startOf('day')}
 moment.today = function() {return moment.utc().startOf('day')}
@@ -32,6 +33,8 @@ moment.$inDay = function(aDay) {
     return {
       ago: function(now) {return (moment(now) || moment.now()).subtract(duration)},
       since: function(now) {return (moment(now) || moment.now()).add(duration)},
+      toString: _.bind(duration.toString, duration),
+      tojson: _.bind(duration.tojson, duration),
       duration: duration
     }
   }
