@@ -49,8 +49,12 @@ moment.$inDay = function(aDay) {
 
 ;(function(Moment) {
 
+  Moment.prototype.toString = function() {
+    return this.clone().utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
+  }
+
   Moment.prototype.tojson = function() {
-    return '"' + this.clone().utc().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]') + '"'
+    return '"' + this.toString() + '"'
   }
 
 })(moment().constructor)
