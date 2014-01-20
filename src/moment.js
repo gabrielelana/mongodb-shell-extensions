@@ -93,4 +93,12 @@ moment.$inDay = function(aDay) {
     this.by(duration.startingAt(this.start), callback)
   }
 
+  DateRange.prototype.toString = function() {
+    return [this.start.toString(), this.end.toString()].join('/')
+  }
+
+  DateRange.prototype.tojson = function() {
+    return '"' + this.toString() + '"'
+  }
+
 })(moment().range().constructor)
