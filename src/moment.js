@@ -26,8 +26,8 @@ moment.$inDay = function(aDay) {
 ;(function() {
   var applyLater = function(duration) {
     return {
-      ago: function(now) {return (now || moment.now()).subtract(duration)},
-      since: function(now) {return (now || moment.now()).add(duration)},
+      ago: function(now) {return (moment(now) || moment.now()).subtract(duration)},
+      since: function(now) {return (moment(now) || moment.now()).add(duration)},
       duration: duration
     }
   }
