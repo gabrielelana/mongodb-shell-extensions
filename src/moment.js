@@ -62,12 +62,12 @@ moment.$inDay = function(aDay) {
 
   Duration.prototype.startingAt = function(momentInTime) {
     momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
-    return moment().range(momentInTime, moment(momentInTime).add(this))
+    return moment.between(momentInTime, moment(momentInTime).add(this))
   }
 
   Duration.prototype.endingAt = function(momentInTime) {
     momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
-    return moment().range(momentInTime.subtract(this), momentInTime)
+    return moment.between(momentInTime.subtract(this), momentInTime)
   }
 
   Duration.prototype.since = function() {
