@@ -11,3 +11,14 @@ You need to have installed the latest version of [NodeJS](http://nodejs.org)
   * `npm install`
   * `bower install`
   * `grunt install`
+
+# TODO
+* Save query result in a named collection `cursor.save('collection')`
+* Chainable cursors saving in temporary collections `cursor.find(query)` same as 
+  ```
+  Collection.temporary(function(tc) {
+    return cursor.save(tc).find(query)
+  })
+  ```
+* Create temporary collections `Collection.temporari([callback])`
+* Execute same query on multiple collections and merge the results ala scatter & gather
