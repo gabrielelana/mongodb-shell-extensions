@@ -47,6 +47,18 @@ moment.$inDay = function(aDay) {
     return '"' + this.toString() + '"'
   }
 
+  Moment.prototype.tillNow = Moment.prototype.toNow = function() {
+    return this.to(moment.now())
+  }
+
+  Moment.prototype.to = function(momentInTime) {
+    momentInTime = momentInTime || moment.now()
+    if (this.isAfter(momentInTime)) {
+      return moment.between(momentInTime, this)
+    }
+    return moment.between(this, momentInTime)
+  }
+
 })(moment().constructor)
 
 
