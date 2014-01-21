@@ -53,29 +53,39 @@ moment.$inDay = function(aDay) {
 ;(function(Duration) {
 
   Duration.prototype.startingNow = function() {
-    return this.startingAt(moment.now())
+    return this.startingAt(/* now is implicit */)
   }
 
   Duration.prototype.endingNow = function() {
-    return this.endingAt(moment.now())
+    return this.endingAt(/* now is implicit */)
   }
 
   Duration.prototype.startingAt = function(momentInTime) {
-    momentInTime = momentInTime || moment.now()
+    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
     return moment().range(momentInTime, moment(momentInTime).add(this))
   }
 
   Duration.prototype.endingAt = function(momentInTime) {
-    momentInTime = momentInTime || moment.now()
-    return moment().range(moment(momentInTime).subtract(this), momentInTime)
+    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
+    return moment().range(momentInTime.subtract(this), momentInTime)
   }
 
-  Duration.prototype.since = function(momentInTime) {
-    return moment(momentInTime ? moment(momentInTime) : moment.now()).add(this)
+  Duration.prototype.since = function() {
+    return this.after(/* now is implicit */)
   }
 
-  Duration.prototype.ago = function(momentInTime) {
-    return moment(momentInTime ? moment(momentInTime) : moment.now()).subtract(this)
+  Duration.prototype.ago = function() {
+    return this.before(/* now is implicit */)
+  }
+
+  Duration.prototype.after = function(momentInTime) {
+    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
+    return momentInTime.add(this)
+  }
+
+  Duration.prototype.before = function(momentInTime) {
+    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
+    return momentInTime.subtract(this)
   }
 
   Duration.prototype.toString = Duration.prototype.humanize
