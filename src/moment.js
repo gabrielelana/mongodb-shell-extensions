@@ -143,6 +143,13 @@ moment.$inDay = function(aDay) {
   
   DateRange.prototype.forEach = function(duration, callback) {
     duration = (typeof duration === 'string') ? moment.duration(1, duration) : duration
+    if (!callback) {
+      var moments = []
+      this.by(duration.startingAt(this.start), function(moment) {
+        moments.push(moment)
+      })
+      return moments
+    }
     this.by(duration.startingAt(this.start), callback)
   }
 
