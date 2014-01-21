@@ -62,11 +62,9 @@ moment.$inDay = function(aDay) {
 
 
 ;(function() {
-  Number.prototype.years = Number.prototype.year = function() {return moment.duration(this.valueOf(), 'years')}
-  Number.prototype.months = Number.prototype.month = function() {return moment.duration(this.valueOf(), 'months')}
-  Number.prototype.days = Number.prototype.day = function() {return moment.duration(this.valueOf(), 'days')}
-  Number.prototype.minutes = Number.prototype.minute = function() {return moment.duration(this.valueOf(), 'minutes')}
-  Number.prototype.seconds = Number.prototype.second = function() {return moment.duration(this.valueOf(), 'seconds')}
+  moment.INTERVALS.forEach(function(interval) {
+    Number.prototype[interval] = function() {return moment.duration(this.valueOf(), interval)}
+  })
 })()
 
 
