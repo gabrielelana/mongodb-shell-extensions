@@ -148,6 +148,7 @@ moment.$inDay = function(aDay) {
       this.by(duration.startingAt(this.start), function(moment) {
         moments.push(moment)
       })
+      moments._ = _(moments)
       return moments
     }
     this.by(duration.startingAt(this.start), callback)
