@@ -154,6 +154,10 @@ moment.$inDay = function(aDay) {
     this.by(duration.startingAt(this.start), callback)
   }
 
+  DateRange.prototype.duration = function() {
+    return moment.duration(this.start.diff(this.end))
+  }
+
   DateRange.prototype.toString = function() {
     return [this.start.toString(), this.end.toString()].join('/')
   }
