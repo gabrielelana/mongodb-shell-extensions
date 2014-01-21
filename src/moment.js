@@ -5,7 +5,7 @@ moment.today = function() {return moment.utc().startOf('day')}
 moment.now = function() {return moment.utc()}
 moment.tomorrow = function() {return moment.utc().add(1, 'day').startOf('day')}
 
-moment.INTERVALS = ['year', 'month', 'day', 'minute', 'second', 'years', 'months', 'days', 'minutes', 'seconds']
+moment.INTERVALS = ['year', 'month', 'day', 'hour', 'minute', 'second', 'years', 'months', 'days', 'hours', 'minutes', 'seconds']
 
 moment.between = function(start, end) {
   return moment().range(start, end)
