@@ -5,6 +5,8 @@ moment.today = function() {return moment.utc().startOf('day')}
 moment.now = function() {return moment.utc()}
 moment.tomorrow = function() {return moment.utc().add(1, 'day').startOf('day')}
 
+moment.INTERVALS = ['year', 'month', 'day', 'minute', 'second', 'years', 'months', 'days', 'minutes', 'seconds']
+
 moment.between = function(start, end) {
   return moment().range(start, end)
 }
@@ -27,6 +29,37 @@ moment.$inDay = function(aDay) {
     '$lte': moment(aDay).endOf('day').toDate()
   }
 }
+
+
+;(function() {
+  moment.last = dateRangeFromIntervalOfTime(function(quantity, interval) {
+    return function() {
+      return moment.between(moment.now().subtract(quantity, interval), moment.now())
+    }
+  })
+
+  moment.next = dateRangeFromIntervalOfTime(function(quantity, interval) {
+    return function() {
+      return moment.between(moment.now(), moment.now().add(quantity, interval))
+    }
+  })
+
+  function dateRangeFromIntervalOfTime(apply) {
+    return function(quantity) {
+      var asString = function() {return quantity + ' of what?'}
+      return _.inject(
+        moment.INTERVALS,
+        function(proxy, interval) {
+          return _.tap(proxy, function() {
+            proxy[interval] = apply(quantity, interval)
+          })
+        },
+        {toString: asString, tojson: asString}
+      )
+    }
+  }
+})()
+
 
 ;(function() {
   Number.prototype.years = Number.prototype.year = function() {return moment.duration(this.valueOf(), 'years')}
