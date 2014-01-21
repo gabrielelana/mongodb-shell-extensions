@@ -29,21 +29,11 @@ moment.$inDay = function(aDay) {
 }
 
 ;(function() {
-  var applyLater = function(duration) {
-    return {
-      ago: function(now) {return (moment(now) || moment.now()).subtract(duration)},
-      since: function(now) {return (moment(now) || moment.now()).add(duration)},
-      toString: _.bind(duration.toString, duration),
-      tojson: _.bind(duration.tojson, duration),
-      duration: duration
-    }
-  }
-
-  Number.prototype.years = Number.prototype.year = function() {return applyLater(moment.duration(this.valueOf(), 'years'))}
-  Number.prototype.months = Number.prototype.month = function() {return applyLater(moment.duration(this.valueOf(), 'months'))}
-  Number.prototype.days = Number.prototype.day = function() {return applyLater(moment.duration(this.valueOf(), 'days'))}
-  Number.prototype.minutes = Number.prototype.minute = function() {return applyLater(moment.duration(this.valueOf(), 'minutes'))}
-  Number.prototype.seconds = Number.prototype.second = function() {return applyLater(moment.duration(this.valueOf(), 'seconds'))}
+  Number.prototype.years = Number.prototype.year = function() {return moment.duration(this.valueOf(), 'years')}
+  Number.prototype.months = Number.prototype.month = function() {return moment.duration(this.valueOf(), 'months')}
+  Number.prototype.days = Number.prototype.day = function() {return moment.duration(this.valueOf(), 'days')}
+  Number.prototype.minutes = Number.prototype.minute = function() {return moment.duration(this.valueOf(), 'minutes')}
+  Number.prototype.seconds = Number.prototype.second = function() {return moment.duration(this.valueOf(), 'seconds')}
 })()
 
 
@@ -71,11 +61,21 @@ moment.$inDay = function(aDay) {
   }
 
   Duration.prototype.startingAt = function(momentInTime) {
-    return moment().range(momentInTime, momentInTime.clone().add(this))
+    momentInTime = momentInTime || moment.now()
+    return moment().range(momentInTime, moment(momentInTime).add(this))
   }
 
   Duration.prototype.endingAt = function(momentInTime) {
-    return moment().range(momentInTime.clone().subtract(this), momentInTime)
+    momentInTime = momentInTime || moment.now()
+    return moment().range(moment(momentInTime).subtract(this), momentInTime)
+  }
+
+  Duration.prototype.since = function(momentInTime) {
+    return moment(momentInTime ? moment(momentInTime) : moment.now()).add(this)
+  }
+
+  Duration.prototype.ago = function(momentInTime) {
+    return moment(momentInTime ? moment(momentInTime) : moment.now()).subtract(this)
   }
 
   Duration.prototype.toString = Duration.prototype.humanize
