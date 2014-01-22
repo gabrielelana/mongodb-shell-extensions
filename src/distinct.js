@@ -1,3 +1,4 @@
+/* global _:true, DBCollection */
 
 DBCollection.prototype.distinctAndCount = function(field, query) {
   query = query || {}
