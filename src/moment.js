@@ -103,14 +103,14 @@ moment.$inDay = function(aDay) {
     return this.endingAt(/* now is implicit */)
   }
 
-  Duration.prototype.startingAt = function(momentInTime) {
-    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
-    return moment.between(momentInTime, moment(momentInTime).add(this))
+  Duration.prototype.startingAt = function(startingAt) {
+    var endingAt = (startingAt ? moment(startingAt) : moment.now()).add(this)
+    return moment.between(startingAt, endingAt)
   }
 
-  Duration.prototype.endingAt = function(momentInTime) {
-    momentInTime = (momentInTime ? moment(momentInTime) : moment.now())
-    return moment.between(momentInTime.subtract(this), momentInTime)
+  Duration.prototype.endingAt = function(endingAt) {
+    var startingAt = (endingAt ? moment(endingAt) : moment.now()).subtract(this)
+    return moment.between(startingAt, endingAt)
   }
 
   Duration.prototype.since = function() {
