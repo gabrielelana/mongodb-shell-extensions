@@ -13,7 +13,7 @@ You need to have installed the latest version of [NodeJS](http://nodejs.org)
   * `grunt install`
 
 # TODO
-* Save query result in a named collection `cursor.save('collection')`
+* `se.collection` could take the current db connection an optional argument
 * Chainable cursors saving in temporary collections `cursor.find(query)` same as 
   ```
   se.collection(function(c) {
