@@ -12,3 +12,11 @@ DBQuery.prototype.reverse = function() {
   }
   return this
 }
+
+DBQuery.prototype.last = function(n) {
+  return this.reverse().limit(n || 1)
+}
+
+DBQuery.prototype.first = function(n) {
+  return this.limit(n || 1)
+}
