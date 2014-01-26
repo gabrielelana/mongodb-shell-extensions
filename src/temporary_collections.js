@@ -38,17 +38,22 @@ se._db = function(_arguments, _callback) {
   return _callback(_db, _arguments)
 }
 
-DB.prototype.createTemporaryCollection = function(callback) {
+DB.prototype.createTemporaryCollection = function(callback, options) {
   var uniquePrefixedName = '__t' + (new ObjectId().valueOf()),
       collection = this.getCollection(uniquePrefixedName),
-      result = collection
+      result
 
+  options = _({deleteAfter: true}, options)
   if (callback) {
     try {
       result = callback(collection)
-      result = result === undefined ? collection : result
+      if ((result === undefined) && !options.deleteAfter) {
+        result = collection
+      }
     } finally {
-      collection.drop()
+      if (options.deleteAfter) {
+        collection.drop()
+      }
     }
   }
 
