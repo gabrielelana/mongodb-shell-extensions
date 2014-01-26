@@ -14,10 +14,4 @@ You need to have installed the latest version of [NodeJS](http://nodejs.org)
 
 # TODO
 * `se.collection` could take the current db connection an optional argument
-* Chainable cursors saving in temporary collections `cursor.find(query)` same as 
-  ```
-  se.collection(function(c) {
-    return cursor.save(c).find(query)
-  })
-  ```
-* Execute same query on multiple collections and merge the results (scatter & gather)
+* execute same query on multiple collections and merge the results (scatter & gather)
