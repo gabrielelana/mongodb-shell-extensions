@@ -2,24 +2,40 @@
 
 var se = se || {}
 
+
 se.collection = function() {
-  assert(db !== undefined, 'global variable db is not defined, are you in a MongoDB shell?')
-  if (arguments.length === 0) {
-    return db.createTemporaryCollection();
+  return se._db(arguments, function(_db, _arguments) {
+    if (_arguments.length === 2 && _.isString(_arguments[0]) && _.isFunction(_arguments[1])) {
+      var collection = _db.getCollection(_arguments[0]),
+          callback = _arguments[1],
+          result = callback(collection)
+      return result === undefined ? collection : result
+    }
+    if (_arguments.length >= 1 && _.isString(_arguments[0])) {
+      return _db.getCollection(_arguments[0])
+    }
+    if (_arguments.length >= 1 && _.isFunction(_arguments[0])) {
+      return _db.createTemporaryCollection(_arguments[0])
+    }
+    return _db
+  })
+}
+
+se._db = function(_arguments, _callback) {
+  var _db = db
+  
+  _arguments = Array.prototype.slice.call(_arguments)
+  if (_arguments.length >= 1 && (_arguments[0].constructor === DB.prototype.constructor)) {
+    _db = _arguments.shift()
   }
-  if (arguments.length === 2 && _.isString(arguments[0]) && _.isFunction(arguments[1])) {
-    var collection = db.getCollection(arguments[0]),
-        callback = arguments[1],
-        result = callback(collection)
-    return result === undefined ? collection : result
+  if (!_db) {
+    throw new Error(
+      'Global variable db not defined... are you in a MongoDB shell?\n' +
+      'In this case you need to use a valid DB instance as a first argument'
+    )
   }
-  if (arguments.length >= 1 && _.isString(arguments[0])) {
-    return db.getCollection(arguments[0])
-  }
-  if (arguments.length >= 1 && _.isFunction(arguments[0])) {
-    return db.createTemporaryCollection(arguments[0])
-  }
-  return db
+
+  return _callback(_db, _arguments)
 }
 
 DB.prototype.createTemporaryCollection = function(callback) {

@@ -13,5 +13,4 @@ You need to have installed the latest version of [NodeJS](http://nodejs.org)
   * `grunt install`
 
 # TODO
-* `se.collection` could take the current db connection an optional argument
 * execute same query on multiple collections and merge the results (scatter & gather)
