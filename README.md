@@ -13,4 +13,6 @@ You need to have installed the latest version of [NodeJS](http://nodejs.org)
   * `grunt install`
 
 # TODO
+* printcsv method
+* have some methods to generate fake data/documents
 * execute same query on multiple collections and merge the results (scatter & gather)
