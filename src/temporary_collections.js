@@ -60,6 +60,17 @@ DB.prototype.createTemporaryCollection = function(callback, options) {
   return result
 }
 
+DB.prototype.getTemporaryCollections = function() {
+  return _(this.getCollectionNames()).filter(/^__t/).map(_.bind(this.getCollection, this)).valueOf()
+}
+
+DB.prototype.dropTemporaryCollections = function() {
+  this.getTemporaryCollections().forEach(function(c) {
+    c.drop()
+  })
+  return true
+}
+
 DBCollection.prototype.isTemporary = function() {
   return this.getName().substr(0, 3) === '__t'
 }
