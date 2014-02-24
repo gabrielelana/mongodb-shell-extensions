@@ -1,5 +1,3 @@
-/* global DBQuery:true */
-
 var se = se || {}
 
 DBQuery.prototype.save = function(collection) {

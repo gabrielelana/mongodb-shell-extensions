@@ -1,7 +1,4 @@
-/* global DB:true, DBCollection:true, ObjectId:true, db:true, _:true, assert:true */
-
 var se = se || {}
-
 
 se.collection = function() {
   return se._db(arguments, function(_db, _arguments) {
@@ -23,7 +20,7 @@ se.collection = function() {
 
 se._db = function(_arguments, _callback) {
   var _db = db
-  
+
   _arguments = Array.prototype.slice.call(_arguments)
   if (_arguments.length >= 1 && (_arguments[0].constructor === DB.prototype.constructor)) {
     _db = _arguments.shift()

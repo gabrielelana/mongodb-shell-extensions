@@ -1,5 +1,3 @@
-/* global _:true */
-
 moment.yesterday = function() {return moment.utc().subtract(1, 'day').startOf('day')}
 moment.today = function() {return moment.utc().startOf('day')}
 moment.now = function() {return moment.utc()}
@@ -140,7 +138,7 @@ moment.$inDay = function(aDay) {
 
 
 ;(function(DateRange) {
-  
+
   DateRange.prototype.forEach = function(duration, callback) {
     duration = (typeof duration === 'string') ? moment.duration(1, duration) : duration
     if (!callback) {

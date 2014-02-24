@@ -1,16 +1,14 @@
 {
   "globals": {
+    "_": false,
     "moment": false,
     "it": false,
-    "console": false,
-    "process": false,
-    "describe": false,
-    "context": false,
-    "expect": true,
-    "beforeEach": false,
-    "afterEach": false,
-    "before": false,
-    "after": false
+    "db": false,
+    "tojson": false,
+    "DB": false,
+    "DBQuery": false,
+    "DBCollection": false,
+    "ObjectId": false
   },
   "evil": true,
   "node": true,

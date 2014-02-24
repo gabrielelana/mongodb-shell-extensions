@@ -1,5 +1,3 @@
-/* global DBQuery:true, _:true */
-
 DBQuery.prototype.reverse = function() {
   if (!this._query.query || _.isEmpty(this._query.query)) {
     this._query.query = {}
