@@ -1,3 +1,5 @@
+/* jshint camelcase: false */
+
 module.exports = function(grunt) {
 
   var chalk = require('grunt-attention/node_modules/chalk')
@@ -24,8 +26,8 @@ module.exports = function(grunt) {
       installed: {
         options: {
           borderColor: 'bgGreen',
-          message: 
-            chalk.green.bold('MongoDB shell extensions installed in your home directory (see <%= copy.dist.dest %>)') + "\n" +
+          message:
+            chalk.green.bold('MongoDB shell extensions installed in your home directory (see <%= copy.dist.dest %>)') + '\n' +
             chalk.green('next time you\'ll open your mongo shell you\'ll have all the extensions automatically loaded')
         }
       }
