@@ -27,8 +27,9 @@ module.exports = function(grunt) {
         options: {
           borderColor: 'bgGreen',
           message:
-            chalk.green.bold('MongoDB shell extensions installed in your home directory (see <%= copy.dist.dest %>)') + '\n' +
-            chalk.green('next time you\'ll open your mongo shell you\'ll have all the extensions automatically loaded')
+            chalk.green.bold('MongoDB shell extensions installed in your home directory\n') +
+            chalk.green('(see <%= copy.dist.dest %>) \n\n') +
+            chalk.green('Next time you\'ll open your mongo shell you\'ll have all the extensions automatically loaded')
         }
       }
     },
