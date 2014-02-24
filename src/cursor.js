@@ -20,3 +20,7 @@ DBQuery.prototype.first = DBQuery.prototype.head =
   function(n) {
     return this.limit(n || 1)
   }
+
+DBQuery.prototype.tojson = function() {
+  return tojson(this.toArray())
+}
