@@ -7,6 +7,7 @@
     "tojson": false,
     "print": false,
     "printjson": false,
+    "assert": false,
     "DB": false,
     "DBQuery": false,
     "DBCollection": false,
