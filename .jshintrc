@@ -5,6 +5,8 @@
     "it": false,
     "db": false,
     "tojson": false,
+    "print": false,
+    "printjson": false,
     "DB": false,
     "DBQuery": false,
     "DBCollection": false,
