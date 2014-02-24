@@ -38,8 +38,12 @@ DB.prototype.createTemporaryCollection = function(callback, options) {
   return result
 }
 
+DB.prototype.getCollections = function() {
+  return _(this.getCollectionNames()).map(_.bind(this.getCollection, this)).valueOf()
+}
+
 DB.prototype.getTemporaryCollections = function() {
-  return _(this.getCollectionNames()).filter(/^__t/).map(_.bind(this.getCollection, this)).valueOf()
+  return _(this.getCollections()).filter(function(c) {return c.isTemporary()}).valueOf()
 }
 
 DB.prototype.dropTemporaryCollections = function() {
