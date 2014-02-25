@@ -27,6 +27,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-attention": "0.0.3",
-    "grunt-cli": "^0.1.13"
+    "grunt-cli": "^0.1.13",
+    "semver": "^2.2.1"
   }
 }

@@ -63,6 +63,16 @@ module.exports = function(grunt) {
   grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
 
-  grunt.registerTask('release-and-tag', ['release:minor'])
-  grunt.registerTask('fix-and-tag', ['release:patch'])
+  grunt.registerTask('release-and-tag', ['bump-readme:minor', 'release:minor'])
+  grunt.registerTask('fix-and-tag', ['bump-readme:patch', 'release:patch'])
+
+  grunt.registerTask('bump-readme', 'Bump version in README.md', function(howToBump) {
+    var readme = grunt.file.read('README.md'),
+        pkg = grunt.file.readJSON('package.json')
+
+    readme = readme.replace(new RegExp('download/' + pkg.version), function(match) {
+      return 'download/' + require('semver').inc(pkg.version, howToBump || 'patch')
+    })
+    grunt.file.write('README.md', readme)
+  })
 }
