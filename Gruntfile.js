@@ -33,6 +33,25 @@ module.exports = function(grunt) {
         }
       }
     },
+    release: {
+      options: {
+        bump: true,
+        add: true,
+        commit: true,
+        commitMessage: 'Release <%= version %>',
+        tag: true,
+        tagName: '<%= version %>',
+        tagMessage: 'Release <%= version %>',
+        push: true,
+        pushTags: true,
+        npm: true,
+        github: {
+          repo: 'gabrielelana/mongodb-shell-extensions',
+          usernameVar: 'GITHUB_USERNAME',
+          passwordVar: 'GITHUB_PASSWORD'
+        }
+      }
+    },
     clean: ['.work', '.dist']
   });
 
@@ -41,6 +60,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-attention')
+  grunt.loadNpmTasks('grunt-release')
 
   // TODO: jshint
   // TODO: automatic tests
