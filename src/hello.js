@@ -1,3 +1,3 @@
-var hello = function() {
-  print('Hello, if you see this then all your MongoDB shell extensions are been loaded correctly')
-}
+/* global chatty */
+
+chatty('\033[1;32m+ MongoDB Shell Extensions by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
