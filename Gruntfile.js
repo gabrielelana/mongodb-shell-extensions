@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     copy: {
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: process.env.HOME + '/.mongorc.js',
+        dest: (process.env.HOME || process.evn.HOMEPATH || process.env.USERPROFILE) + '/.mongorc.js',
       }
     },
     attention: {
@@ -45,6 +45,6 @@ module.exports = function(grunt) {
   // TODO: jshint
   // TODO: automatic tests
   grunt.registerTask('build', ['clean', 'bower_concat', 'concat'])
-  grunt.registerTask('install', ['build','copy', 'attention:installed'])
+  grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
 }
