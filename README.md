@@ -1,18 +1,30 @@
 # MongoDB Shell Extensions
-Simple collection of utilities to make the life inside of the MongoDB shell a little bit easier
+Collection of utilities to make the life inside of the MongoDB shell a little bit easier
+
+# How to Install
+Install as a global module of npm
+```
+npm install --global mongodb-shell-extensions
+```
+You will find a `.mongorc` file in your home directory that contains all the extensions. This file will be loaded automatically in the next MongoDB shell session
+
+The next time you'll start a MongoDB shell you should see a message like this (the message will not be displayed if the shell is in quiet mode `mongo --quiet`)
+```
+$ mongo
+MongoDB shell version: 2.4.8
+connecting to: test
++ MongoDB Shell Extensions by Gabriele Lana <gabriele.lana@gmail.com>
+>
+```
+
+# How to Disable
+If you want to temporary disable the extensions you can start the MongoDB shell with the `--norc` flag
+```
+$ mongo --norc
+MongoDB shell version: 2.4.8
+connecting to: test
+>
+```
 
 # How to Use
 ...TODO...
-
-# How to Install
-You need to have installed the latest version of [NodeJS](http://nodejs.org)
-* `npm install --global bower grunt-cli`
-* then inside the root directory of this project
-  * `npm install`
-  * `bower install`
-  * `grunt install`
-
-# TODO
-* printcsv method
-* have some methods to generate fake data/documents
-* execute same query on multiple collections and merge the results (scatter & gather)
