@@ -44,12 +44,7 @@ module.exports = function(grunt) {
         tagMessage: 'Release <%= version %>',
         push: true,
         pushTags: true,
-        npm: true,
-        github: {
-          repo: 'gabrielelana/mongodb-shell-extensions',
-          usernameVar: 'GITHUB_USERNAME',
-          passwordVar: 'GITHUB_PASSWORD'
-        }
+        npm: true
       }
     },
     clean: ['.work', '.dist']
@@ -67,4 +62,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['clean', 'bower_concat', 'concat'])
   grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
+
+  grunt.registerTask('release-and-tag', ['release:minor'])
+  grunt.registerTask('fix-and-tag', ['release:patch'])
 }
