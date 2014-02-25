@@ -31,13 +31,13 @@ Collection of utilities to make the life inside of the MongoDB shell a little bi
   * `moment.last(30, 'days').forEach('day', function(m) { db.orders.count({created_at: moment.$inDay(m)}) })` - how many orders per day where created in the last 30 days
 
 # How to Install
-Install as a global module of npm
-```
-npm install --global mongodb-shell-extensions
-```
-Or you can download `mongorc.js` from the latest release and copy it in your home directory as `.mongorc`
+Download `mongorc.js` from the latest [release](https://github.com/gabrielelana/mongodb-shell-extensions/releases/latest) and copy it in your home directory as `.mongorc`
 ```
 curl -sL https://github.com/gabrielelana/mongodb-shell-extensions/releases/download/0.1.1/mongorc.js | ~/.mongorc
+```
+Or if you want you can install it using npm (N.B. it will do a complete build and so it needs a bunch of packages)
+```
+npm install --global mongodb-shell-extensions
 ```
 
 Now you have a `.mongorc` file in your home directory that contains all the extensions. This file will be loaded automatically in the next MongoDB shell session
