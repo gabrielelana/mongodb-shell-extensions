@@ -6,7 +6,12 @@ Install as a global module of npm
 ```
 npm install --global mongodb-shell-extensions
 ```
-You will find a `.mongorc` file in your home directory that contains all the extensions. This file will be loaded automatically in the next MongoDB shell session
+Or you can download `mongorc.js` from the latest release and copy it in your home directory as `.mongorc`
+```
+curl -sL https://github.com/gabrielelana/mongodb-shell-extensions/releases/download/0.1.1/mongorc.js | ~/.mongorc
+```
+
+Now you have a `.mongorc` file in your home directory that contains all the extensions. This file will be loaded automatically in the next MongoDB shell session
 
 The next time you'll start a MongoDB shell you should see a message like this (the message will not be displayed if the shell is in quiet mode `mongo --quiet`)
 ```
