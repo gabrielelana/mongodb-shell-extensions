@@ -35,7 +35,7 @@ Download `mongorc.js` from the latest [release](https://github.com/gabrielelana/
 ```
 curl -sL https://github.com/gabrielelana/mongodb-shell-extensions/releases/download/0.1.1/mongorc.js | ~/.mongorc
 ```
-Or if you want you can install it using npm (N.B. it will do a complete build and so it needs to install a bunch of packages)
+Or if you want you can install it using npm (N.B. It will do a complete build and so it needs to install a bunch of packages)
 ```
 npm install --global mongodb-shell-extensions
 ```
@@ -59,6 +59,3 @@ MongoDB shell version: 2.4.8
 connecting to: test
 >
 ```
-
-# How to Use
-...TODO...
