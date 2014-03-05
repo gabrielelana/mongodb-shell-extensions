@@ -1,3 +1,6 @@
+# Release 0.1.3
+* Fixed npm install process
+
 # Release 0.1.2
 * Setup spec harness
 * Setup continuous integration with `travis-ci`
