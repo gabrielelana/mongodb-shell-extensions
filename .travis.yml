@@ -1,4 +1,6 @@
 language: node_js
+install: grunt install-head
+script: grunt spec-on-installed
 node_js:
   - "0.10"
 services:

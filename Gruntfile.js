@@ -5,6 +5,7 @@ module.exports = function(grunt) {
   var chalk = require('grunt-attention/node_modules/chalk')
 
   grunt.initConfig({
+    install_at: (process.env.HOME || process.evn.HOMEPATH || process.env.USERPROFILE) + '/.mongorc.js',
     bower_concat: {
       dist: {
         dest: '.work/bower_components.js'
@@ -17,9 +18,17 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      dist: {
+      release: {
         src: '<%= concat.dist.dest %>',
-        dest: (process.env.HOME || process.evn.HOMEPATH || process.env.USERPROFILE) + '/.mongorc.js',
+        dest: '<% copy.released.dest %>'
+      },
+      builded: {
+        src: '<%= concat.dist.dest %>',
+        dest: '<%= install_at %>',
+      },
+      released: {
+        src: './released/mongorc.js',
+        dest: '<%= install_at %>',
       }
     },
     attention: {
@@ -28,7 +37,7 @@ module.exports = function(grunt) {
           borderColor: 'bgGreen',
           message:
             chalk.green.bold('MongoDB shell extensions installed in your home directory\n') +
-            chalk.green('(see <%= copy.dist.dest %>) \n\n') +
+            chalk.green('(see <%= install_at %>) \n\n') +
             chalk.green('Next time you\'ll open your mongo shell you\'ll have all the extensions automatically loaded')
         }
       }
@@ -63,14 +72,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-release')
 
   grunt.registerTask('build', ['clean', 'jshint', 'bower_concat', 'concat'])
-  grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
-  grunt.registerTask('default', ['build'])
 
-  grunt.registerTask('spec', ['build', 'run-all-specs:current'])
+  grunt.registerTask('install-head', ['build', 'copy:builded', 'attention:installed'])
+  grunt.registerTask('install-released', ['copy:released', 'attention:installed'])
+
+  grunt.registerTask('spec', ['spec-on-head'])
+  grunt.registerTask('spec-on-head', ['build', 'run-all-specs:head'])
   grunt.registerTask('spec-on-installed', ['run-all-specs:installed'])
 
-  grunt.registerTask('release-and-tag', ['bump-readme:minor', 'release:minor'])
-  grunt.registerTask('fix-and-tag', ['bump-readme:patch', 'release:patch'])
+  grunt.registerTask('release-and-tag', ['copy:release', 'bump-readme:minor', 'release:minor'])
+  grunt.registerTask('fix-and-tag', ['copy:release', 'bump-readme:patch', 'release:patch'])
+
+  grunt.registerTask('default', ['spec'])
+
+
 
   grunt.registerTask('bump-readme', 'Bump version in README.md', function(howToBump) {
     var readme = grunt.file.read('README.md'),
@@ -86,7 +101,7 @@ module.exports = function(grunt) {
     var done = this.async(),
         path = require('path'),
         spawn = require('child_process').spawn,
-        fileToLoad = (onWhat || 'current') === 'current' ? path.join(__dirname, './.dist/mongorc.js') : null,
+        fileToLoad = (onWhat || 'head') === 'head' ? path.join(__dirname, './.dist/mongorc.js') : null,
         commandArguments = fileToLoad ? ['--quiet', fileToLoad, '_runner.js'] : ['--quiet', '_runner.js'],
         runner = spawn('mongo', commandArguments, {cwd: path.join(__dirname, 'spec')})
 
