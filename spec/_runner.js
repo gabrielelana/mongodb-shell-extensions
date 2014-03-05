@@ -1,19 +1,25 @@
-/* global listFiles, load, assert: true */
+/* global listFiles, load, assert */
 
 var files = listFiles('.'),
     startedAt = new Date(),
     testFilesToSkip = []
 
 
-assert.that = function(testDescription, testCase) {
+assert.that = function(description, assertion, tearDown) {
   assert(
     'test' === db.getName(),
     'You cannot run this tests in db \'' + db.getName() + '\'.\n' +
     'Retry with `mongo --quiet _runner.js`'
   )
-  var runInCollection = db.getCollection('mongodb-shell-extensions')
+  var context = {}, runInCollection = db.getCollection('mongodb-shell-extensions')
   runInCollection.drop()
-  testCase(runInCollection, db)
+  try {
+    assertion.call(context, runInCollection, db)
+  } finally {
+    if (tearDown) {
+      tearDown.call(context, runInCollection, db)
+    }
+  }
 }
 
 files.forEach(function(x) {
