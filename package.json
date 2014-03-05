@@ -4,7 +4,7 @@
   "description": "Useful MongoDB shell extensions",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
+    "test": "grunt spec-on-installed",
     "install": "grunt install"
   },
   "repository": {

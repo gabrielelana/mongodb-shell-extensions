@@ -62,6 +62,9 @@ module.exports = function(grunt) {
   grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
 
+  grunt.registerTask('spec', ['build', 'run-all-specs:current'])
+  grunt.registerTask('spec-on-installed', ['run-all-specs:installed'])
+
   grunt.registerTask('release-and-tag', ['bump-readme:minor', 'release:minor'])
   grunt.registerTask('fix-and-tag', ['bump-readme:patch', 'release:patch'])
 
@@ -75,11 +78,13 @@ module.exports = function(grunt) {
     grunt.file.write('README.md', readme)
   })
 
-  grunt.registerTask('spec', 'Run all specs in MongoDB Shell', function() {
+  grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat) {
     var done = this.async(),
         path = require('path'),
         spawn = require('child_process').spawn,
-        runner = spawn('mongo', ['--quiet', '_runner.js'], {cwd: path.join(__dirname, 'spec')})
+        fileToLoad = (onWhat || 'current') === 'current' ? path.join(__dirname, './.dist/mongorc.js') : null,
+        commandArguments = fileToLoad ? ['--quiet', fileToLoad, '_runner.js'] : ['--quiet', '_runner.js'],
+        runner = spawn('mongo', commandArguments, {cwd: path.join(__dirname, 'spec')})
 
     runner.stdout.on('data', function(data) {
       grunt.log.write(data.toString())
