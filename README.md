@@ -39,7 +39,7 @@ curl -sL https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/rel
 ```
 Or if you want you can install it using npm
 ```
-npm install --global --production mongodb-shell-extensions
+npm install --global mongodb-shell-extensions
 ```
 
 Now you have a `.mongorc` file in your home directory that contains all the extensions. This file will be loaded automatically in the next MongoDB shell session
