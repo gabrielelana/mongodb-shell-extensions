@@ -80,22 +80,12 @@ module.exports = function(grunt) {
   grunt.registerTask('spec-on-head', ['build', 'run-all-specs:head'])
   grunt.registerTask('spec-on-installed', ['run-all-specs:installed'])
 
-  grunt.registerTask('release-and-tag', ['copy:release', 'bump-readme:minor', 'release:minor'])
-  grunt.registerTask('fix-and-tag', ['copy:release', 'bump-readme:patch', 'release:patch'])
+  grunt.registerTask('release-and-tag', ['copy:release', 'release:minor'])
+  grunt.registerTask('fix-and-tag', ['copy:release', 'release:patch'])
 
   grunt.registerTask('default', ['spec'])
 
 
-
-  grunt.registerTask('bump-readme', 'Bump version in README.md', function(howToBump) {
-    var readme = grunt.file.read('README.md'),
-        pkg = grunt.file.readJSON('package.json')
-
-    readme = readme.replace(new RegExp('download/' + pkg.version), function(match) {
-      return 'download/' + require('semver').inc(pkg.version, howToBump || 'patch')
-    })
-    grunt.file.write('README.md', readme)
-  })
 
   grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat) {
     var done = this.async(),
