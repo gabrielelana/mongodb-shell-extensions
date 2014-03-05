@@ -58,7 +58,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-release')
 
   // TODO: jshint
-  // TODO: automatic tests
   grunt.registerTask('build', ['clean', 'bower_concat', 'concat'])
   grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
@@ -74,5 +73,25 @@ module.exports = function(grunt) {
       return 'download/' + require('semver').inc(pkg.version, howToBump || 'patch')
     })
     grunt.file.write('README.md', readme)
+  })
+
+  grunt.registerTask('spec', 'Run all specs in MongoDB Shell', function() {
+    var done = this.async(),
+        path = require('path'),
+        spawn = require('child_process').spawn,
+        runner = spawn('mongo', ['--quiet', '_runner.js'], {cwd: path.join(__dirname, 'spec')})
+
+    runner.stdout.on('data', function(data) {
+      grunt.log.write(data.toString())
+    })
+    runner.stderr.on('data', function(data) {
+      grunt.log.error(data.toString())
+    })
+    runner.on('close', function(code) {
+      if (code !== 0) {
+        grunt.util.exit(code)
+      }
+      done()
+    })
   })
 }
