@@ -1,6 +1,8 @@
 # MongoDB Shell Extensions
 Collection of utilities to make the life inside of the MongoDB shell a little bit easier
 
+[![Build Status](https://travis-ci.org/gabrielelana/mongodb-shell-extensions.png?branch=master)](https://travis-ci.org/gabrielelana/mongodb-shell-extensions)
+
 # Highlights
 * `DB#getCollections` - get all collections in current db
 * `Collection#distinctAndCount` - count how many distinct values
