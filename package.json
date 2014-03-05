@@ -29,5 +29,8 @@
     "grunt-attention": "0.0.3",
     "grunt-cli": "^0.1.13",
     "semver": "^2.2.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.8.0"
   }
 }

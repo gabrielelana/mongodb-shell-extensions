@@ -33,6 +33,10 @@ module.exports = function(grunt) {
         }
       }
     },
+    jshint: {
+      options: grunt.file.readJSON('.jshintrc'),
+      all: ['Gruntfile.js', 'spec/**/*.js', 'src/**/*.js']
+    },
     release: {
       options: {
         bump: true,
@@ -53,12 +57,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-concat')
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-jshint')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-attention')
   grunt.loadNpmTasks('grunt-release')
 
-  // TODO: jshint
-  grunt.registerTask('build', ['clean', 'bower_concat', 'concat'])
+  grunt.registerTask('build', ['clean', 'jshint', 'bower_concat', 'concat'])
   grunt.registerTask('install', ['build', 'copy', 'attention:installed'])
   grunt.registerTask('default', ['build'])
 
