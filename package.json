@@ -4,7 +4,7 @@
   "description": "Useful MongoDB shell extensions",
   "main": "index.js",
   "scripts": {
-    "install": "grunt install-released",
+    "install": "npm install --production && grunt install-released",
     "test": "grunt spec-on-installed"
   },
   "repository": {
@@ -20,7 +20,6 @@
   "license": "MIT",
   "author": "gabriele.lana@gmail.com",
   "devDependencies": {
-    "grunt": "^0.4.2",
     "grunt-release": "^0.7.0",
     "grunt-bower-concat": "^0.2.3",
     "grunt-contrib-concat": "^0.3.0",
