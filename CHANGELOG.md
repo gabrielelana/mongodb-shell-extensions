@@ -1,3 +1,8 @@
+# Release 0.1.2
+* Setup spec harness
+* Setup continuous integration with `travis-ci`
+* User install process doesn't require to build the whole thing
+
 # Release 0.1.1
 * Fixed release process
 
