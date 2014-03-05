@@ -4,8 +4,5 @@ node_js:
 services:
   - mongodb
 
-before_install:
-  - npm install grunt
-  - npm install grunt-cli
-install: grunt install-head
+before_script: grunt install-head
 script: grunt spec-on-installed

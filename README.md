@@ -37,7 +37,7 @@ Download `mongorc.js` from the latest [release](https://raw.github.com/gabrielel
 ```
 curl -sL https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/released/mongorc.js | ~/.mongorc
 ```
-Or if you want you can install it using npm
+Or if you want you can install it using npm (N.B. This is going to install a bunch of dependencies, if you care about your disk space then prefer the first option)
 ```
 npm install --global mongodb-shell-extensions
 ```

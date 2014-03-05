@@ -4,7 +4,7 @@
   "description": "Useful MongoDB shell extensions",
   "main": "index.js",
   "scripts": {
-    "install": "npm install --production && grunt install-released",
+    "install": "grunt install-released",
     "test": "grunt spec-on-installed"
   },
   "repository": {
@@ -19,7 +19,9 @@
   ],
   "license": "MIT",
   "author": "gabriele.lana@gmail.com",
-  "devDependencies": {
+  "dependencies": {
+    "grunt": "^0.4.2",
+    "grunt-cli": "^0.1.13",
     "grunt-release": "^0.7.0",
     "grunt-bower-concat": "^0.2.3",
     "grunt-contrib-concat": "^0.3.0",
@@ -29,8 +31,5 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-attention": "^0.0.3",
     "semver": "^2.2.1"
-  },
-  "dependencies": {
-    "grunt-cli": "^0.1.13"
   }
 }
