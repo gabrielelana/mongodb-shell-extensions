@@ -2,7 +2,18 @@
   "name": "mongodb-shell-extensions",
   "version": "0.1.2",
   "description": "Useful MongoDB shell extensions",
-  "main": "index.js",
+  "files": [
+    "src",
+    "spec",
+    "released",
+    ".jshintrc",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "package.json",
+    "bower.json",
+    "Gruntfile.js"
+  ],
   "scripts": {
     "install": "grunt install-released",
     "test": "grunt spec-on-installed"
