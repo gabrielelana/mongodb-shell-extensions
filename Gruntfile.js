@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     copy: {
       release: {
         src: '<%= concat.dist.dest %>',
-        dest: '<% copy.released.dest %>'
+        dest: '<%= copy.released.src %>'
       },
       builded: {
         src: '<%= concat.dist.dest %>',
