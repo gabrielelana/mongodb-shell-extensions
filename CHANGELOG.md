@@ -1,3 +1,6 @@
+# Release 0.1.5
+* Fixed CSV constructor without a name
+
 # Release 0.1.4
 * Initial documentation
 * Fixed spec run on Travis
