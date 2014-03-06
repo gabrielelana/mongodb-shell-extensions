@@ -8,7 +8,7 @@ DBQuery.prototype.printcsv = function() {
 
 var CSV = (function(CSV) {
 
-  CSV = function(lines) {
+  CSV = function CSV(lines) {
     this.lines = lines
   }
 
