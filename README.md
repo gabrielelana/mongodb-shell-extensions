@@ -130,30 +130,182 @@ This is really a bunch of wonderful open source projects put together with a lit
 
 
 # Documentation
-* `DB#getCollections` - get all collections in current db
-* `Collection#distinctAndCount` - count how many distinct values
-* `Collection#first` - first element inserted in collection
-* `Collection#last` - last element inserted in collection
-* `Query#reverse` - reverse query sort order
-* `Query#first` - return only the first element in result
-* `Query#last` - return only the last element in result
-* `Query#tojson` - serialize query result using json format
-* CSV support
-  * `Query#tocsv` - serialize query result using csv format
-  * `Query#printcsv` - print query result using csv format
-  * `tocsv(x)` - serialize `x` using csv format
-  * `printcsv(x)` - print `x` using csv format
-* JSONPath support
-  * `Query#select(x)` - filter result using jsonpath expression `x`
-  * `jsonpath(o, x)` - filter object `o` using jsonpath expression `x`
-* Temporary collections
-  * `DB#collection(f)` - creates a temporary collection that will be available to `f` and automatically destroyed immediately after
-  * `DB#getTemporaryCollections()` - get all temporary collections
-  * `DB#dropTempraryCollections()` - drop all temporary collections
-  * `Collection#isTemporary` - returns true if the collection is temporary
-* Storable cursors
-  * `Query#save(c)` - save the query result into a collection `c`
-* Better time manipulation support using moment.js library
-  * `db.orders.find({created_at: moment.$today()})` - find orders created today, it will generate something like `{$gte: ISODate('2014-02-25'), $lte: ISODate()}`
-  * `db.orders.find({created_at: moment.$last(3, 'days')})` - find orders created in the last 3 days
-  * `moment.last(30, 'days').forEach('day', function(m) { db.orders.count({created_at: moment.$inDay(m)}) })` - how many orders per day where created in the last 30 days
+Sorry, this is a work in progress, in the meantime, if you don't find what you are looking for _"look at the source Luke"_ or drop me an email :wink:
+* [`DB#getCollections()`](#DB-getCollections) - get all collections in current db
+* [`Collection#distinctAndCount()`](#Collection-distinctAndCount) - count how many distinct values
+* [`Collection#first()`](#Collection-first) - first element inserted in collection
+* [`Collection#last()`](#Collection-last) - last element inserted in collection
+* [`Query#reverse()`](#Query-reverse) - reverse query sort order
+* [`Query#first()`](#Query-first) - return only the first element in result
+* [`Query#last()`](#Query-last) - return only the last element in result
+* [`Query#tojson()`](#Query-tojson) - serialize query result using json format
+* [`CSV Support`](#CSV)
+  * [`tocsv(x)`](#tocsv) - serialize `x` using csv format
+  * [`printcsv(x)`](#printcsv) - print `x` using csv format
+  * [`Query#tocsv()`](#Query-tocsv) - serialize query result using csv format
+  * [`Query#printcsv()`](#Query-printcsv) - print query result using csv format
+* [`JSONPath Support`](#JSONPath)
+  * [`Query#select(x)`](#Query-select) - filter result using jsonpath expression `x`
+  * [`jsonpath(o, x)`](#jsonpath) - filter object `o` using jsonpath expression `x`
+* [`Temporary Collections`](#TemporaryCollections)
+  * [`DB#collection(f)`](#DB-collection) - creates a temporary collection that will be available to `f` and automatically destroyed immediately after
+  * [`DB#getTemporaryCollections()`](#DB-getTemporaryCollections) - get all temporary collections
+  * [`DB#dropTempraryCollections()`](#DB-dropTempraryCollections) - drop all temporary collections
+  * [`Collection#isTemporary`](#Collection-isTemporary) - returns true if the collection is temporary
+* [`Storable Cursors`](#StorableCursors)
+  * [`Query#save(c)`](#Query-save) - save the query result into a collection `c`
+* [`LoDash Integration`](#LoDash)
+* [`MomentJS Integration`](#MomentJS)
+
+<a name="DB-getCollections" />
+### `DB#getCollections()`
+Returns an array of all collection instances
+```js
+> db.getCollections().map(function(c) {return c.count()})
+[ 5793, 4, 1003, 4373 ]
+```
+
+<a name="Collection-distinctAndCount" />
+### `Collection#distinctAndCount(field, query)`
+For each distinct value of `field` counts the occurrences in documents optionally filtered by `query`
+```js
+> db.users.distinctAndCount('name', {name: /^a/i})
+{
+	"Abagail": 1,
+	"Abbey": 3,
+	"Abbie": 1,
+	"Abdiel": 2,
+	"Abdullah": 1,
+	"Adah": 1,
+	"Adalberto": 5,
+	"Adela": 1,
+  ...
+]
+```
+
+<a name="Collection-first" />
+### `Collection#first(n)`
+Returns the first n (ordered by `_id`) elements inserted in the collection
+```js
+> db.users.first().length()
+1
+> db.users.first(3).length()
+3
+```
+
+<a name="Collection-last" />
+### `Collection#last(n)`
+Returns the last n (ordered by `_id`) elements inserted in the collection
+```js
+> db.users.save({name: "Gabriele", surname: "Lana", job: "Software Craftsman"})
+> db.users.last().pretty()
+{
+	"_id" : ObjectId("531879529c812de54e6711e1"),
+	"name" : "Gabriele",
+	"surname" : "Lana",
+	"job" : "Software Craftsman"
+}
+```
+
+<a name="Query-reverse" />
+### `Query-reverse()`
+
+<a name="Query-first" />
+### `Query-first()`
+
+<a name="Query-last" />
+### `Query-last()`
+
+<a name="Query-tojson" />
+### `Query-tojson()`
+
+
+
+<a name="CSV" />
+## `CSV`
+
+<a name="tocsv" />
+### `tocsv(x)`
+Returns a `CSV` instance which is a collections of lines. The first line is the CSV header with the union of all the fields found in all the documents. The other lines are the CSV representation of the documents, one document per line. `CSV` inherits most of the collection methods implemented in `LoDash`
+```js
+> tocsv(db.users.find({name: /^a/i}))
+_id,name,surname,job
+"5318565aca4f6f419b00001e","Abagail","Crona","Zoologist"
+"5318565aca4f6f419b000007","Abbey","Tromp","Writer"
+"5318565aca4f6f419b0000da","Abbie","Wilkinson","Carpenter"
+"5318565aca4f6f419b00007a","Abdiel","Schuster","Educator"
+"5318565aca4f6f419b0002d1","Abdiel","Schneider","Librarian"
+"5318565aca4f6f419b00030d","Abdullah","Baumbach","Librarian"
+"5318565aca4f6f419b0000dc","Adah","Lind","Dancer"
+"5318565aca4f6f419b0002ed","Adalberto","Reynolds","Librarian"
+"5318565aca4f6f419b000066","Adela","Keebler","Educator"
+"5318565aca4f6f419b0002d2","Adolf","Boyer","Farmer"
+...
+```
+This is the same result of `printcsv` but don't be fooled, the shell calls `shellPrint()` method on every object that needs to be displayed by the shell itself, `shellPrint()` will print the `CSV` instance exactly as `printjson` would but you can do other things beside printing it
+```js
+> tocsv(db.users.find({name: /^a/i})).head()
+_id,name,surname,job
+// sample will return a random line
+> tocsv(db.users.find({name: /^a/i})).sample()
+"5318565aca4f6f419b000098","Arlo","Huels","Lawyer"
+```
+It will work with everything has a `map` method
+```js
+> tocsv([{name: "Gabriele", surname: "Lana"}])
+name,surname
+"Gabriele","Lana"
+```
+
+<a name="printcsv" />
+### `printcsv(x)`
+It will print each line of the CSV returned by `tocsv()`. This is useful when you want to export redirecting the output. Unfortunately `--eval` option will be evaluated **before** any script so it cannot be used to execute something defined in your `~/.mongorc.js`
+```
+$ cat > exportUsersToCSV.js <<SCRIPT
+heredoc> printcsv(db.users.find())
+heredoc> SCRIPT
+$ mongo db-with-users --quiet ~/.mongorc.js ./exportUsersToCSV.js | tail -n +3 > users.csv
+```
+
+<a name="Query-tocsv" />
+### `Query#tocsv()`
+Same as `tocsv()` but called on a query
+```js
+> db.users.find().tocsv()
+// It's the same as
+> tocsv(db.users.find())
+```
+
+<a name="Query-printcsv" />
+### `Query#printcsv()`
+Same as `printcsv()` but called on a query
+```js
+> db.users.find().printcsv()
+// It's the same as
+> printcsv(db.users.find())
+```
+
+
+
+<a name="JSONPath" />
+## `JSONPath Support`
+
+
+
+<a name="TemporaryCollections" />
+## `Temporary Collections`
+
+
+
+<a name="StorableCursors" />
+## `Storable Cursors`
+
+
+
+<a name="LoDash" />
+## `LoDash Integration`
+
+
+
+<a name="MomentJS" />
+## `MomentJS Integration`
