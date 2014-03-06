@@ -4,4 +4,10 @@ node_js:
 services:
   - mongodb
 
-script: grunt spec-on-head
+before_install:
+  - npm install --global bower
+  - bower --quiet install
+install:
+  - grunt install
+script:
+  - grunt spec-on-head

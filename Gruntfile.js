@@ -13,8 +13,8 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        dest: '.dist/mongorc.js',
-        src: ['.work/*.js', 'src/**/*.js']
+        src: ['.work/*.js', 'src/**/*.js'],
+        dest: '.dist/mongorc.js'
       }
     },
     copy: {
@@ -96,14 +96,6 @@ module.exports = function(grunt) {
           grunt.config('install_at'),
         commandArguments = ['--quiet', fileToLoad, '_runner.js'],
         runner = spawn('mongo', commandArguments, {cwd: path.join(__dirname, 'spec')})
-
-
-    require('fs').readFile('./.dist/mongorc.js', 'utf8', function(err, data) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(data);
-    })
 
     runner.stdout.on('data', function(data) {
       grunt.log.write(data.toString())
