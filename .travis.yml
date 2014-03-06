@@ -7,7 +7,5 @@ services:
 before_install:
   - npm install --global bower grunt-cli
   - bower --quiet install
-install:
-  - grunt install
 script:
   - grunt spec-on-head
