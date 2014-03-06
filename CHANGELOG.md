@@ -1,3 +1,7 @@
+# Release 0.1.4
+* Initial documentation
+* Fixed spec run on Travis
+
 # Release 0.1.3
 * Fixed npm install process
 
