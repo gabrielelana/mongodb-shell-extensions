@@ -136,11 +136,17 @@ connecting to: test
 >
 ```
 
-# How to Disable
+# How to Temporary Disable
 If you want to temporary disable the extensions you can start the MongoDB shell with the `--norc` flag
 ```
 $ mongo --norc
 MongoDB shell version: 2.4.8
 connecting to: test
 >
+```
+
+# How to Uninstall
+Remove `.mongorc` from your home directory
+```
+$ rm ~/.mongorc
 ```
