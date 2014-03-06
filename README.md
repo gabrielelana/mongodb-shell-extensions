@@ -127,6 +127,7 @@ $ rm ~/.mongorc
 This is really a bunch of wonderful open source projects put together with a little glue, so, many thanks to:
 * [MomentJS](http://momentjs.com/) with [DateRange](https://github.com/gf3/moment-range) plugin
 * [LoDash](http://lodash.com/)
+* [JSONPath](http://code.google.com/p/jsonpath/)
 
 
 # Documentation
