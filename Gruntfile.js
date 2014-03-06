@@ -91,8 +91,10 @@ module.exports = function(grunt) {
     var done = this.async(),
         path = require('path'),
         spawn = require('child_process').spawn,
-        fileToLoad = (onWhat || 'head') === 'head' ? path.join(__dirname, './.dist/mongorc.js') : null,
-        commandArguments = fileToLoad ? ['--quiet', fileToLoad, '_runner.js'] : ['--quiet', '_runner.js'],
+        fileToLoad = (onWhat || 'head') === 'head' ?
+          path.join(__dirname, './.dist/mongorc.js') :
+          grunt.config('install_at'),
+        commandArguments = ['--quiet', fileToLoad, '_runner.js'],
         runner = spawn('mongo', commandArguments, {cwd: path.join(__dirname, 'spec')})
 
     runner.stdout.on('data', function(data) {
