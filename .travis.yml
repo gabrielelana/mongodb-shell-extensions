@@ -5,7 +5,7 @@ services:
   - mongodb
 
 before_install:
-  - npm install --global bower grunt
+  - npm install --global bower grunt-cli
   - bower --quiet install
 install:
   - grunt install
