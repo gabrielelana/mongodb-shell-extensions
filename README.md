@@ -209,16 +209,16 @@ Returns the last n (ordered by `_id`) elements inserted in the collection
 ```
 
 <a name="Query-reverse" />
-### `Query-reverse()`
+### `Query#reverse()`
 
 <a name="Query-first" />
-### `Query-first()`
+### `Query#first()`
 
 <a name="Query-last" />
-### `Query-last()`
+### `Query#last()`
 
 <a name="Query-tojson" />
-### `Query-tojson()`
+### `Query#tojson()`
 
 
 
