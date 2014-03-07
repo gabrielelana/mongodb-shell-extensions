@@ -8,12 +8,12 @@ You have a collection `visits` like that
 ```js
 > db.visits.findOne()
 {
-	"_id" : "a0039342e1cda7446cbb55aac2108491-20140306",
-	"at" : ISODate("2014-03-06T11:04:59.524Z"),
-	"digest" : "a0039342e1cda7446cbb55aac2108491",
-	"duration" : 150,
-	"hits" : 5,
-	"url" : "http://roob.biz/pearline"
+  "_id" : "a0039342e1cda7446cbb55aac2108491-20140306",
+  "at" : ISODate("2014-03-06T11:04:59.524Z"),
+  "digest" : "a0039342e1cda7446cbb55aac2108491",
+  "duration" : 150,
+  "hits" : 5,
+  "url" : "http://roob.biz/pearline"
 }
 ```
 You need to find how many visits there have been in the last 10 day... You know that dealing with dates is a mess, unless you have loaded the mighty `MongoDB Shell Extensions` in that case your life would be much, much easier
@@ -172,14 +172,14 @@ For each distinct value of `field` counts the occurrences in documents optionall
 ```js
 > db.users.distinctAndCount('name', {name: /^a/i})
 {
-	"Abagail": 1,
-	"Abbey": 3,
-	"Abbie": 1,
-	"Abdiel": 2,
-	"Abdullah": 1,
-	"Adah": 1,
-	"Adalberto": 5,
-	"Adela": 1,
+  "Abagail": 1,
+  "Abbey": 3,
+  "Abbie": 1,
+  "Abdiel": 2,
+  "Abdullah": 1,
+  "Adah": 1,
+  "Adalberto": 5,
+  "Adela": 1,
   ...
 ]
 ```
@@ -201,10 +201,10 @@ Returns the last n (ordered by `_id`) elements inserted in the collection
 > db.users.save({name: "Gabriele", surname: "Lana", job: "Software Craftsman"})
 > db.users.last().pretty()
 {
-	"_id" : ObjectId("531879529c812de54e6711e1"),
-	"name" : "Gabriele",
-	"surname" : "Lana",
-	"job" : "Software Craftsman"
+  "_id" : ObjectId("531879529c812de54e6711e1"),
+  "name" : "Gabriele",
+  "surname" : "Lana",
+  "job" : "Software Craftsman"
 }
 ```
 
