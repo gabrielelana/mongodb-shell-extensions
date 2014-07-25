@@ -1,7 +1,6 @@
-# MongoDB Shell Extensions
-Collection of utilities to make the life inside of the MongoDB shell a little bit easier
+# MongoDB Shell Extensions [![Build Status](https://travis-ci.org/gabrielelana/mongodb-shell-extensions.svg?branch=master)](https://travis-ci.org/gabrielelana/mongodb-shell-extensions)
 
-[![Build Status](https://travis-ci.org/gabrielelana/mongodb-shell-extensions.png?branch=master)](https://travis-ci.org/gabrielelana/mongodb-shell-extensions)
+Collection of utilities to make the life inside of the MongoDB shell a little bit easier
 
 # Quick Examples
 You have a collection `visits` like that
