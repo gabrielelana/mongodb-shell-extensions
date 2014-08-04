@@ -22,7 +22,7 @@ assert.that = function(description, assertion, tearDown) {
   }
 }
 
-files.forEach(function(x) {
+_(files).sortBy('name').forEach(function(x) {
   var testFileName = x.name.replace(/^\.\//, '')
   if (/[\/\\]_/.test(x.name) || !/\.js$/.test(x.name) || testFilesToSkip.indexOf(testFileName) >= 0) {
     return print(' ### skipping: ' + testFileName)
