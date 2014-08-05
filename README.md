@@ -180,7 +180,21 @@ For each distinct value of `field` counts the occurrences in documents optionall
   "Adalberto": 5,
   "Adela": 1,
   ...
-]
+}
+```
+The `field` parameter could be an array of fields
+```js
+> db.users.distinctAndCount(['name','job'], {name: /^a/i})
+{
+  "Austin,Educator" : 1,
+  "Aurelia,Educator" : 1,
+  "Augustine,Carpenter" : 1,
+  "Augusta,Carpenter" : 2,
+  "Audreanne,Zoologist" : 1,
+  "Audreanne,Farmer" : 1,
+  "Aubree,Lawyer" : 1,
+  ...
+}
 ```
 
 <a name="Collection-first" />
