@@ -10242,6 +10242,10 @@ moment.fn.within = function(range) {
     return moment;
 }));
 
+/* global chatty */
+
+chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.0) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
+
 DBCollection.prototype.last = function(n) {
   return this.find().sort({_id: -1}).limit(n || 1)
 }
@@ -10386,10 +10390,6 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
   }
   return it
 }
-
-/* global chatty */
-
-chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.0) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
 
 DBQuery.prototype.select = function(expression) {
   if (_.isString(expression)) {
