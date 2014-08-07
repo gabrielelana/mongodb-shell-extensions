@@ -20,7 +20,14 @@ module.exports = function(grunt) {
     copy: {
       release: {
         src: '<%= concat.dist.dest %>',
-        dest: '<%= copy.released.src %>'
+        dest: '<%= copy.released.src %>',
+        options: {
+          process: function (content, srcpath) {
+            return content.replace(
+              '###version###', grunt.file.readJSON('package.json')['version']
+            )
+          }
+        }
       },
       builded: {
         src: '<%= concat.dist.dest %>',

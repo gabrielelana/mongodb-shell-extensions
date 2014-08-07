@@ -10389,7 +10389,7 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
 
 /* global chatty */
 
-chatty('\033[1;32m+ MongoDB Shell Extensions by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
+chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.0) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
 
 DBQuery.prototype.select = function(expression) {
   if (_.isString(expression)) {
