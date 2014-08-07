@@ -21,8 +21,8 @@
     "tests"
   ],
   "dependencies": {
-    "momentjs": "~2.5.0",
     "lodash": "~2.4.1",
-    "moment-range": "~0.1.9"
+    "moment": "~2.8.1",
+    "moment-range": "~1.0.2"
   }
 }

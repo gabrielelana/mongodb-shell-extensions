@@ -31,16 +31,16 @@
   "license": "MIT",
   "author": "gabriele.lana@gmail.com",
   "dependencies": {
-    "grunt": "^0.4.2",
+    "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-release": "^0.7.0",
-    "grunt-bower-concat": "^0.2.3",
-    "grunt-contrib-concat": "^0.3.0",
-    "grunt-contrib-jshint": "^0.8.0",
-    "grunt-contrib-uglify": "^0.2.7",
-    "grunt-contrib-clean": "^0.5.0",
+    "grunt-bower-concat": "^0.3.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-attention": "^0.0.3",
-    "semver": "^2.2.1"
+    "grunt-attention": "^0.0.5",
+    "semver": "^3.0.1"
   }
 }
