@@ -14,13 +14,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: ['.work/*.js', 'src/**/*.js'],
-        dest: '.dist/mongorc.js'
-      }
-    },
-    copy: {
-      release: {
-        src: '<%= concat.dist.dest %>',
-        dest: '<%= copy.released.src %>',
+        dest: '.dist/mongorc.js',
         options: {
           process: function (content, srcpath) {
             return content.replace(
@@ -28,6 +22,12 @@ module.exports = function(grunt) {
             )
           }
         }
+      }
+    },
+    copy: {
+      release: {
+        src: '<%= concat.dist.dest %>',
+        dest: '<%= copy.released.src %>'
       },
       builded: {
         src: '<%= concat.dist.dest %>',
