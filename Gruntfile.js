@@ -55,8 +55,8 @@ module.exports = function(grunt) {
     },
     release: {
       options: {
-        bump: true,
-        add: true,
+        add: false,
+        bump: false,
         commit: true,
         commitMessage: 'Release <%= version %>',
         tag: true,
@@ -87,11 +87,15 @@ module.exports = function(grunt) {
   grunt.registerTask('spec-on-head', ['build', 'run-all-specs:head'])
   grunt.registerTask('spec-on-installed', ['run-all-specs:installed'])
 
-  grunt.registerTask('release-and-tag', ['copy:release', 'release:minor'])
-  grunt.registerTask('fix-and-tag', ['copy:release', 'release:patch'])
+  // To do a release you need to:
+  // * change the version in package.json
+  // * execute `grunt prepare-release`
+  // * execute `git add --all && git commit -m "Update release"`
+  // * execute `grunt release-and-publish`
+  grunt.registerTask('prepare-release', ['build', 'copy:release'])
+  grunt.registerTask('release-and-publish', ['release'])
 
   grunt.registerTask('default', ['spec'])
-
 
 
   grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat) {
