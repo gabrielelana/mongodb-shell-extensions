@@ -57,8 +57,7 @@ module.exports = function(grunt) {
       options: {
         add: false,
         bump: false,
-        commit: true,
-        commitMessage: 'Release <%= version %>',
+        commit: false,
         tag: true,
         tagName: '<%= version %>',
         tagMessage: 'Release <%= version %>',
@@ -90,7 +89,7 @@ module.exports = function(grunt) {
   // To do a release you need to:
   // * change the version in package.json
   // * execute `grunt prepare-release`
-  // * execute `git add --all && git commit -m "Update release"`
+  // * execute `git add --all && git commit -m "Release <version>"`
   // * execute `grunt release-and-publish`
   grunt.registerTask('prepare-release', ['build', 'copy:release'])
   grunt.registerTask('release-and-publish', ['release'])
