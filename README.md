@@ -135,9 +135,9 @@ Sorry, this is a work in progress, in the meantime, if you don't find what you a
 * [`Collection#distinctAndCount()`](#Collection-distinctAndCount) - count how many distinct values
 * [`Collection#first()`](#Collection-first) - first element inserted in collection
 * [`Collection#last()`](#Collection-last) - last element inserted in collection
-* [`Query#reverse()`](#Query-reverse) - reverse query sort order
 * [`Query#first()`](#Query-first) - return only the first element in result
 * [`Query#last()`](#Query-last) - return only the last element in result
+* [`Query#reverse()`](#Query-reverse) - reverse query sort order
 * [`Query#tojson()`](#Query-tojson) - serialize query result using json format
 * [`CSV Support`](#CSV)
   * [`tocsv(x)`](#tocsv) - serialize `x` using csv format
@@ -221,14 +221,21 @@ Returns the last n (ordered by `_id`) elements inserted in the collection
 }
 ```
 
-<a name="Query-reverse" />
-### `Query#reverse()`
-
 <a name="Query-first" />
 ### `Query#first()`
+Same as [`Collection#first()`](#Collection-first)
 
 <a name="Query-last" />
 ### `Query#last()`
+Same as [`Collection#last()`](#Collection-last)
+
+<a name="Query-reverse" />
+### `Query#reverse()`
+Reverse the order of the cursor
+```js
+> db.users.first()._id === db.users.find().reverse().last()._id
+true
+```
 
 <a name="Query-tojson" />
 ### `Query#tojson()`
