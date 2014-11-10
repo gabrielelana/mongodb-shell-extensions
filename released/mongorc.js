@@ -10244,7 +10244,7 @@ moment.fn.within = function(range) {
 
 /* global chatty */
 
-chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.2) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
+chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.3) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
 
 DBCollection.prototype.last = function(n) {
   return this.find().sort({_id: -1}).limit(n || 1)
@@ -10370,7 +10370,7 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
   query = query || {}
 
   var groupById = _([].concat(field)).reduce(function(result, key) {
-    result[key.replace('.', '_')] = '$' + key; return result
+    result[key.replace(/\./g, '_')] = '$' + key; return result
   }, {})
 
   var it = this.aggregate(
@@ -10379,16 +10379,19 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
     {$project: {values: '$_id', count: 1, _id: 0}}
   )
 
-  if (it.ok === 1) {
-    return _.reduce(it.result, function(all, r) {
-      if (!_.any(r.values, isObject)) {
-        all[_.values(r.values).join(',')] = r.count
-        return all
-      }
-      throw 'distinctAndCount fields could not be objects: ' + tojson(r.values)
-    }, {})
+  var resultIsAnObject = (it.result !== undefined) && (it.ok !== undefined)
+  if (resultIsAnObject && it.ok === 0) {
+    return it
   }
-  return it
+
+  var result = it.result || it.toArray()
+  return _.reduce(result, function(all, r) {
+    if (!_.any(r.values, isObject)) {
+      all[_.values(r.values).join(',')] = r.count
+      return all
+    }
+    throw 'distinctAndCount fields could not be objects: ' + tojson(r.values)
+  }, {})
 }
 
 DBQuery.prototype.select = function(expression) {
