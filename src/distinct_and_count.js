@@ -5,7 +5,7 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
   query = query || {}
 
   var groupById = _([].concat(field)).reduce(function(result, key) {
-    result[key.replace('.', '_')] = '$' + key; return result
+    result[key.replace(/\./g, '_')] = '$' + key; return result
   }, {})
 
   var it = this.aggregate(
