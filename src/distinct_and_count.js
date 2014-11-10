@@ -14,14 +14,17 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
     {$project: {values: '$_id', count: 1, _id: 0}}
   )
 
-  if (it.ok === 1) {
-    return _.reduce(it.result, function(all, r) {
-      if (!_.any(r.values, isObject)) {
-        all[_.values(r.values).join(',')] = r.count
-        return all
-      }
-      throw 'distinctAndCount fields could not be objects: ' + tojson(r.values)
-    }, {})
+  var resultIsAnObject = (it.result !== undefined) && (it.ok !== undefined)
+  if (resultIsAnObject && it.ok === 0) {
+    return it
   }
-  return it
+
+  var result = it.result || it.toArray()
+  return _.reduce(result, function(all, r) {
+    if (!_.any(r.values, isObject)) {
+      all[_.values(r.values).join(',')] = r.count
+      return all
+    }
+    throw 'distinctAndCount fields could not be objects: ' + tojson(r.values)
+  }, {})
 }
