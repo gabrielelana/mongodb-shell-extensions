@@ -47,35 +47,50 @@ var printcsv = function(x) {
   })
 }
 
-var tocsv = function(x) {
-  var lines = [],
-      fieldNames = {},
-      encodedDocuments = x.map(function(doc) {
-        return _.reduce(doc, function(values, value, field) {
-          fieldNames[field] = true
-          values[field] = tojson(value).replace(
-            /^(?:ISODate|ObjectId)\((.*)\)$/,
-            function(_, contentAsString) {
-              return contentAsString
-            }
-          )
-          return values
-        }, {})
-      })
+var tocsv = (function() {
+  var flatten = function(o) {
+    return _.reduce(o, function(flattened, value, field) {
+      if (_.isPlainObject(value)) {
+        _.forEach(flatten(value), function(nestedValue, nestedField) {
+          flattened[[field, nestedField].join('.')] = nestedValue
+        })
+      } else {
+        flattened[field] = value
+      }
+      return flattened
+    }, {})
+  }
 
-  fieldNames = _.keys(fieldNames)
+  return function(x) {
+    var lines = [],
+        fieldNames = {},
+        encodedDocuments = x.map(function(doc) {
+          return _.reduce(flatten(doc), function(values, value, field) {
+            fieldNames[field] = true
+            values[field] = tojson(value).replace(
+              /^(?:ISODate|ObjectId)\((.*)\)$/,
+              function(_, contentAsString) {
+                return contentAsString
+              }
+            )
+            return values
+          }, {})
+        })
 
-  lines.push(fieldNames.join(','))
-  encodedDocuments.forEach(function(encodedDocument) {
-    lines.push(
-      fieldNames.map(function(fieldName) {
-        if (encodedDocument[fieldName] !== undefined) {
-          return encodedDocument[fieldName]
-        }
-        return '""'
-      }).join(',')
-    )
-  })
+    fieldNames = _.keys(fieldNames)
 
-  return new CSV(lines)
-}
+    lines.push(fieldNames.join(','))
+    encodedDocuments.forEach(function(encodedDocument) {
+      lines.push(
+        fieldNames.map(function(fieldName) {
+          if (encodedDocument[fieldName] !== undefined) {
+            return encodedDocument[fieldName]
+          }
+          return ''
+        }).join(',')
+      )
+    })
+
+    return new CSV(lines)
+  }
+})()
