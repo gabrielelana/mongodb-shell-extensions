@@ -88,7 +88,7 @@ Be mind, we only have scratched the surface of what we can do
 # How to Install
 Download `mongorc.js` from the latest [release](https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/released/mongorc.js) and copy it into your home directory as `.mongorc`
 ```
-curl -sL https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/released/mongorc.js | ~/.mongorc
+curl -sL https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/released/mongorc.js > ~/.mongorc
 ```
 Or if you want you can install it using npm (N.B. This is going to install a bunch of dependencies, if you care about your disk space then prefer the first option)
 ```
