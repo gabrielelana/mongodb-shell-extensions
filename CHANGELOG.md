@@ -1,3 +1,19 @@
+# Release 0.2.5
+* `DBCollection.distinctAndCount` on array fields
+* `DBCollection.distinctAndCount` on primitive like (ex. `Number`, `ISODate`, …) fields
+
+# Release 0.2.4
+* `toCSV` support for documents with nested fields
+
+# Release 0.2.3
+* Support aggregate framework changes in 2.6
+
+# Release 0.2.2
+* Add release version in startup message
+
+# Release 0.2.0
+* `DBCollection.distinctAndCount` on multiple fields
+
 # Release 0.1.5
 * Fixed CSV constructor without a name
 
