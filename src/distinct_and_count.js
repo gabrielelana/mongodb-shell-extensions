@@ -21,10 +21,44 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
 
   var result = it.result || it.toArray()
   return _.reduce(result, function(all, r) {
-    if (!_.any(r.values, isObject)) {
-      all[_.values(r.values).join(',')] = r.count
-      return all
+
+    var isValidValue =
+      _(r.values)
+        .chain()
+        .values()
+        .any(function(value) {
+          if (_(value).isArray()) {
+            return _(value).all(function(value) {
+              return !_(value).isObject()
+            })
+          }
+          // we support values like Number or Date but not {}
+          return value.constructor.name !== ''
+        })
+        .valueOf()
+
+    if (!isValidValue) {
+      throw 'distinctAndCount could not work when one or more fields are objects: ' + tojson(r.values)
     }
-    throw 'distinctAndCount fields could not be objects: ' + tojson(r.values)
+
+    var key =
+      _(r.values)
+        .chain()
+        .values()
+        .map(function(value) {
+          if (_(value.valueOf).isFunction()) {
+            value = value.valueOf()
+          }
+          if (_(value).isArray()) {
+            value = _(value).sort().valueOf()
+          }
+          return value
+        })
+        .valueOf()
+        .join(',')
+
+    all[key] = (all[key] || 0) + r.count
+
+    return all
   }, {})
 }
