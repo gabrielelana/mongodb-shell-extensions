@@ -1,24 +1,24 @@
-// assert.that('distinctAndCount on one field', function(c) {
-//   c.save({field: 'value_1'})
-//   c.save({field: 'value_2'})
-//   c.save({field: 'value_1'})
+assert.that('distinctAndCount on one field', function(c) {
+  c.save({field: 'value_1'})
+  c.save({field: 'value_2'})
+  c.save({field: 'value_1'})
 
-//   var result = c.distinctAndCount('field')
+  var result = c.distinctAndCount('field')
 
-//   assert.eq(2, result['value_1'])
-//   assert.eq(1, result['value_2'])
-// })
+  assert.eq(2, result['value_1'])
+  assert.eq(1, result['value_2'])
+})
 
-// assert.that('distinctAndCount on one nested field', function(c) {
-//   c.save({field: {nested: 'value_1'}})
-//   c.save({field: {nested: 'value_2'}})
-//   c.save({field: {nested: 'value_1'}})
+assert.that('distinctAndCount on one nested field', function(c) {
+  c.save({field: {nested: 'value_1'}})
+  c.save({field: {nested: 'value_2'}})
+  c.save({field: {nested: 'value_1'}})
 
-//   var result = c.distinctAndCount('field.nested')
+  var result = c.distinctAndCount('field.nested')
 
-//   assert.eq(2, result['value_1'])
-//   assert.eq(1, result['value_2'])
-// })
+  assert.eq(2, result['value_1'])
+  assert.eq(1, result['value_2'])
+})
 
 assert.that('distinctAndCount on deeply nested fields', function(c) {
   c.save({field: {nested: {nested: {nested: 'value_1'}}}})
