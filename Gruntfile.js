@@ -96,15 +96,25 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['spec'])
 
+  // !!! I need to automate this, but it's not easy
+  // How to run tests on a different MongoDB
+  // * start mongod on a different port with a command like
+  //    `~/opt/mongodb-2.2.7/bin/mongod --port 3100
+  //    --dbpath .tmp/db --logpath .tmp/log --fork
+  //    --quiet --nojournal --noprealloc --smallfiles
+  //    `
+  // * change the task spec definition to `['spec-on-head:3100']`
+  // * run `grunt spec`
 
-  grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat) {
+  grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat, onPort) {
     var done = this.async(),
         path = require('path'),
         spawn = require('child_process').spawn,
         fileToLoad = (onWhat || 'head') === 'head' ?
           path.join(__dirname, './.dist/mongorc.js') :
           grunt.config('install_at'),
-        commandArguments = ['--quiet', fileToLoad, '_runner.js'],
+        portToConnectTo = (onPort ? onPort : '27017'),
+        commandArguments = ['--quiet', '--port', portToConnectTo, fileToLoad, '_runner.js'],
         runner = spawn('mongo', commandArguments, {cwd: path.join(__dirname, 'spec')})
 
     runner.stdout.on('data', function(data) {

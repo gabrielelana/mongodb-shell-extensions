@@ -4,6 +4,9 @@ var files = listFiles('.'),
     startedAt = new Date(),
     testFilesToSkip = []
 
+if (db) {
+  print(' ### MongoDB(' + db.version() + ')')
+}
 
 assert.that = function(description, assertion, tearDown) {
   assert(
