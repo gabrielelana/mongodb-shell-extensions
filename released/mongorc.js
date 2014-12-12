@@ -10244,7 +10244,7 @@ moment.fn.within = function(range) {
 
 /* global chatty */
 
-chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.5) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
+chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.6) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
 
 DBCollection.prototype.last = function(n) {
   return this.find().sort({_id: -1}).limit(n || 1)
@@ -10352,11 +10352,9 @@ var tocsv = (function() {
 })()
 
 DBQuery.prototype.reverse = function() {
-  if (!this._query.query || _.isEmpty(this._query.query)) {
-    this._query.query = {}
-  }
+  this._checkModify();
   if (!this._query.orderby || _.isEmpty(this._query.orderby)) {
-    this._query.orderby = {'$natural': 1}
+    this._addSpecial('orderby', {'$natural': 1});
   }
   for (var field in this._query.orderby) {
     this._query.orderby[field] = this._query.orderby[field] * -1

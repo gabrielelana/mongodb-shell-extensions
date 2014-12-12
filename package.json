@@ -1,6 +1,6 @@
 {
   "name": "mongodb-shell-extensions",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Useful MongoDB shell extensions",
   "files": [
     "src",
