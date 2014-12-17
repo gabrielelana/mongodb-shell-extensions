@@ -10244,7 +10244,7 @@ moment.fn.within = function(range) {
 
 /* global chatty */
 
-chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.6) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
+chatty('\033[1;32m+ MongoDB Shell Extensions (0.2.7) by Gabriele Lana <gabriele.lana@gmail.com>\033[0m')
 
 DBCollection.prototype.last = function(n) {
   return this.find().sort({_id: -1}).limit(n || 1)
@@ -10404,6 +10404,12 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
       _(r.values)
         .chain()
         .values()
+        .map(function(value) {
+          if (value === null) {
+            return {valueOf: function() {return value}}
+          }
+          return value
+        })
         .any(function(value) {
           if (_(value).isArray()) {
             return _(value).all(function(value) {
@@ -10424,6 +10430,9 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
         .chain()
         .values()
         .map(function(value) {
+          if (value === null) {
+            return '#null#'
+          }
           if (_(value.valueOf).isFunction()) {
             value = value.valueOf()
           }
