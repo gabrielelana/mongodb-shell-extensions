@@ -26,6 +26,12 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
       _(r.values)
         .chain()
         .values()
+        .map(function(value) {
+          if (value === null || value === undefined) {
+            return {valueOf: function() {return value}}
+          }
+          return value
+        })
         .any(function(value) {
           if (_(value).isArray()) {
             return _(value).all(function(value) {
@@ -46,6 +52,9 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
         .chain()
         .values()
         .map(function(value) {
+          if (value === null) {
+            return '#null#'
+          }
           if (_(value.valueOf).isFunction()) {
             value = value.valueOf()
           }

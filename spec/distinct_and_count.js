@@ -70,6 +70,17 @@ assert.that('distinctAndCount works on multiple array fields', function(c) {
   assert.eq(2, result['value_1,value_2,value_2'])
 })
 
+assert.that('distinctAndCount works when distinct field is null', function(c) {
+  c.save({field: 'value_1'})
+  c.save({field: null})
+  c.save({field: undefined}) // undefined is saved as null
+  c.save({field: 'value_1'})
+
+  var result = c.distinctAndCount('field')
+
+  assert.eq(2, result['#null#'])
+})
+
 assert.that('distinctAndCount throws an exception on object fields', function(c) {
   c.save({field: 'value_1'})
   c.save({field: {key: 'value_2'}})
