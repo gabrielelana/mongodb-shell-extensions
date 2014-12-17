@@ -27,7 +27,7 @@ DBCollection.prototype.distinctAndCount = function(field, query) {
         .chain()
         .values()
         .map(function(value) {
-          if (value === null || value === undefined) {
+          if (value === null) {
             return {valueOf: function() {return value}}
           }
           return value
