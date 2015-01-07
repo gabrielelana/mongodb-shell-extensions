@@ -1,4 +1,4 @@
-/* global listFiles, load, assert */
+/* global listFiles, load, assert, doassert */
 
 var files = listFiles('.'),
     startedAt = new Date(),
@@ -23,6 +23,24 @@ assert.that = function(description, assertion, tearDown) {
       tearDown.call(context, runInCollection, db)
     }
   }
+}
+
+if (!assert.doesNotThrow) {
+  assert.doesNotThrow = function(func, params, msg) {
+    if (assert._debug && msg) {
+      print('in assert for: ' + msg);
+    }
+    if (params && typeof(params) === 'string') {
+      throw ('2nd argument to assert.throws has to be an array, not ' + params);
+    }
+    try {
+      func.apply(null, params);
+    }
+    catch (e) {
+      doassert('threw unexpected exception: ' + e + ' : ' + msg);
+    }
+    return;
+  };
 }
 
 _(files).sortBy('name').forEach(function(x) {
