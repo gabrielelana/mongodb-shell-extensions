@@ -21,6 +21,15 @@ moment.$between = function(fromTime, toTime) {
   }
 }
 
+moment.$in = function(aDateRange) {
+  if (_([aDateRange.start, aDateRange.end]).all(function(aMoment) {
+    return _(aMoment).isObject() && (aMoment.constructor.name === 'Moment')
+  })) {
+    return moment.$between(aDateRange.start, aDateRange.end)
+  }
+  throw 'moment.$in(aDateRange): aDateRange should be a valid DateRange (ex: moment.last(3).days())'
+}
+
 moment.$inDay = function(aDay) {
   return {
     '$gte': moment(aDay).startOf('day').toDate(),
