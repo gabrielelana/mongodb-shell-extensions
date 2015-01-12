@@ -1,3 +1,5 @@
+/* global shellHelper, __prettyShell:true */
+
 DBQuery.prototype.reverse = function() {
   this._checkModify();
   if (!this._query.orderby || _.isEmpty(this._query.orderby)) {
@@ -22,3 +24,18 @@ DBQuery.prototype.first = DBQuery.prototype.head =
 DBQuery.prototype.tojson = function() {
   return tojson(this.toArray())
 }
+
+DBQuery.prototype.ugly = function(){
+    this._prettyShell = false;
+    return this;
+}
+
+;(function(shellPrint, prettyShell) {
+  DBQuery.prototype.shellPrint = function() {
+    prettyShell = this._prettyShell
+    this._prettyShell = this._prettyShell || __prettyShell
+    var result = shellPrint.call(this)
+    this._prettyShell = prettyShell
+    return result
+  }
+})(DBQuery.prototype.shellPrint)
