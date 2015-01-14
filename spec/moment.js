@@ -24,3 +24,15 @@ assert.that('moment.$in requires a date range', function(c) {
     moment.$in(moment().range())
   }, [], 'a DateRange should be accepted as date range')
 })
+
+assert.that('moment.last (incomplete range) when printed gives useful informations', function() {
+  assert.eq(moment.last(5).toString(), '5 of what?')
+})
+
+assert.that('moment.next (incomplete range) when printed gives useful informations', function() {
+  assert.eq(moment.next(5).toString(), '5 of what?')
+})
+
+assert.that('incomplete duration when printed gives useful informations', function() {
+  assert.eq((5).days(), '5 days')
+})
