@@ -1,4 +1,4 @@
-/* global shellHelper, __prettyShell:true */
+/* global shellHelper, __prettyShell:true, sprintf */
 
 __prettyShell = false
 
@@ -15,14 +15,14 @@ shellHelper.ugly = function() {
 ;(function() {
 
   shellHelper.d = function() {
-    var collections = db.getMongo().getDBs().databases.forEach(function(d) {
+    db.getMongo().getDBs().databases.forEach(function(d) {
       var numberOfCollections = db.getMongo().getDB(d.name).getCollectionNames().length
       print(
-        d.name + '\t' +
-        ((d.sizeOnDisk > 1) ?
-          numberOfCollections + '/' + bytesToSize(d.sizeOnDisk) :
-          '(empty)'
-        )
+        sprintf('%-30s\t%s', d.name,
+          ((d.sizeOnDisk > 1) ?
+            numberOfCollections + '/' + bytesToSize(d.sizeOnDisk) :
+            '(empty)'
+          ))
       );
     })
   }
@@ -30,11 +30,11 @@ shellHelper.ugly = function() {
   shellHelper.c = function() {
     db.getCollections().forEach(function(c) {
       print(
-        c.getName() + '\t' +
-        ((c.totalSize() > 0) ?
-          c.count() + '/' + bytesToSize(c.totalSize()) :
-          '(empty)'
-        )
+        sprintf('%-30s\t%s', c.getName(),
+          ((c.totalSize() > 0) ?
+            c.count() + '/' + bytesToSize(c.totalSize()) :
+            '(empty)'
+          ))
       );
     })
   }
