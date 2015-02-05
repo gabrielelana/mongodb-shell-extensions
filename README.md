@@ -129,9 +129,13 @@ This is really a bunch of wonderful open source projects put together with a lit
 * [JSONPath](http://code.google.com/p/jsonpath/)
 * [sprintf.js](https://github.com/alexei/sprintf.js)
 
-
 # Documentation
 Sorry, this is a work in progress, in the meantime, if you don't find what you are looking for _"look at the source Luke"_ or drop me an email :wink:
+* [`command pretty`](#Command-Pretty) - switch shell to pretty printing mode
+* [`command ugly`](#Command-Ugly) - switch shell off from pretty printing mode
+* [`command d|dbs|databases`](#Command-ListDatabases) - list all databases and storage data
+* [`command c|colls|collections`](#Command-ListCollections) - list all collections in the current db
+* [`command so`](#Command-SlaveOk) - alias for `rs.slaveOk()`
 * [`DB#getCollections()`](#DB-getCollections) - get all collections in current db
 * [`Collection#distinctAndCount()`](#Collection-distinctAndCount) - count how many distinct values
 * [`Collection#first()`](#Collection-first) - first element inserted in collection
@@ -157,6 +161,78 @@ Sorry, this is a work in progress, in the meantime, if you don't find what you a
   * [`Query#save(c)`](#Query-save) - save the query result into a collection `c`
 * [`LoDash Integration`](#LoDash)
 * [`MomentJS Integration`](#MomentJS)
+
+<a name="Command-Pretty" />
+### `command pretty`
+Switch shell to pretty printing mode. Everything that could be pretty printed it will be automatically without asking for it
+```
+> db.users.first()
+{ "_id" : ObjectId("53e0f55eca4f6f6589000001"), "name" : "Mervin", "surname" : "Witting", "job" : "Journalist" }
+> db.users.first().pretty()
+{
+  "_id" : ObjectId("53e0f55eca4f6f6589000001"),
+  "name" : "Mervin",
+  "surname" : "Witting",
+  "job" : "Journalist"
+}
+> pretty
+pretty printing: enabled
+> db.users.first()
+{
+  "_id" : ObjectId("53e0f55eca4f6f6589000001"),
+  "name" : "Mervin",
+  "surname" : "Witting",
+  "job" : "Journalist"
+}
+```
+
+
+<a name="Command-Ugly" />
+### `command ugly`
+Switch shell off from pretty printing mode
+```
+> db.users.first()
+{
+  "_id" : ObjectId("53e0f55eca4f6f6589000001"),
+  "name" : "Mervin",
+  "surname" : "Witting",
+  "job" : "Journalist"
+}
+> ugly
+pretty printing: disabled
+> db.users.first()
+{ "_id" : ObjectId("53e0f55eca4f6f6589000001"), "name" : "Mervin", "surname" : "Witting", "job" : "Journalist" }
+```
+
+
+<a name="Command-ListDatabases" />
+### `command d|dbs|databases`
+List all databases and storage data. The format is NUMBER_OF_COLLECTIONS/SIZE_ON_DISK
+```
+> d
+recruiter                       4/208MB
+playground                      2/208MB
+waitress-test                   3/208MB
+mongoose-trackable-test         2/208MB
+mongoose-eventful-test          6/80MB
+hangman                         2/208MB
+```
+
+<a name="Command-ListCollections" />
+### `command d|dbs|databases`
+List all collections and storage data. The format is NUMBER_OF_DOCUMENTS/SIZE_ON_DISK
+```
+> c
+archived                        1/32KB
+roster                          1/16KB
+scheduled                       0/32KB
+system.indexes                  3/4KB
+```
+
+<a name="Command-SlaveOk" />
+### `command so`
+Alias for `rs.slaveOk()` nothing fancy, I was just tired of typing it
+
 
 <a name="DB-getCollections" />
 ### `DB#getCollections()`
