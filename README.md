@@ -186,7 +186,6 @@ pretty printing: enabled
 }
 ```
 
-
 <a name="Command-Ugly" />
 ### `command ugly`
 Switch shell off from pretty printing mode
@@ -203,7 +202,6 @@ pretty printing: disabled
 > db.users.first()
 { "_id" : ObjectId("53e0f55eca4f6f6589000001"), "name" : "Mervin", "surname" : "Witting", "job" : "Journalist" }
 ```
-
 
 <a name="Command-ListDatabases" />
 ### `command d|dbs|databases`
@@ -232,7 +230,6 @@ system.indexes                  3/4KB
 <a name="Command-SlaveOk" />
 ### `command so`
 Alias for `rs.slaveOk()` nothing fancy, I was just tired of typing it
-
 
 <a name="DB-getCollections" />
 ### `DB#getCollections()`
