@@ -1,4 +1,4 @@
-/* global shellHelper, __prettyShell:true, sprintf */
+/* global shellHelper, __prettyShell:true, sprintf, rs */
 
 __prettyShell = false
 
@@ -10,6 +10,10 @@ shellHelper.pretty = function() {
 shellHelper.ugly = function() {
   __prettyShell = false
   print('pretty printing: disabled');
+}
+
+shellHelper.so = function() {
+  rs.slaveOk()
 }
 
 ;(function() {
