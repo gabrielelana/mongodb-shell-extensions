@@ -14,7 +14,7 @@ shellHelper.ugly = function() {
 
 ;(function() {
 
-  shellHelper.d = function() {
+  shellHelper.databases = shellHelper.dbs = shellHelper.d = function() {
     db.getMongo().getDBs().databases.forEach(function(d) {
       var numberOfCollections = db.getMongo().getDB(d.name).getCollectionNames().length
       print(
@@ -27,7 +27,7 @@ shellHelper.ugly = function() {
     })
   }
 
-  shellHelper.c = function() {
+  shellHelper.collections = shellHelper.colls = shellHelper.c = function() {
     db.getCollections().forEach(function(c) {
       print(
         sprintf('%-30s\t%s', c.getName(),
