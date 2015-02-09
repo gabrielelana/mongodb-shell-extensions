@@ -19,10 +19,15 @@ shellHelper.so = function() {
 ;(function() {
 
   shellHelper.databases = shellHelper.dbs = shellHelper.d = function() {
+    var currentDbName = db.getName()
+    var highlight = function(string) {
+      return String.fromCharCode(0x1B) + '[32;1m' + string + String.fromCharCode(0x1B) + '[0m'
+    }
     db.getMongo().getDBs().databases.forEach(function(d) {
       var numberOfCollections = db.getMongo().getDB(d.name).getCollectionNames().length
       print(
-        sprintf('%-30s\t%s', d.name,
+        sprintf(d.name === currentDbName ? highlight('%-30s\t%s') : '%-30s\t%s',
+          d.name,
           ((d.sizeOnDisk > 1) ?
             numberOfCollections + '/' + bytesToSize(d.sizeOnDisk) :
             '(empty)'
