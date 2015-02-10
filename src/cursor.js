@@ -3,7 +3,7 @@
 DBQuery.prototype.reverse = function() {
   this._checkModify();
   if (!this._query.orderby || _.isEmpty(this._query.orderby)) {
-    this._addSpecial('orderby', {'$natural': 1});
+    this._addSpecial('orderby', {'$natural': 1})
   }
   for (var field in this._query.orderby) {
     this._query.orderby[field] = this._query.orderby[field] * -1
@@ -11,9 +11,21 @@ DBQuery.prototype.reverse = function() {
   return this
 }
 
+DBQuery.prototype.sortAsInserted = function() {
+  this._checkModify();
+  this._addSpecial('orderby', {'$natural': 1})
+  return this
+}
+
+DBQuery.prototype.sortById = function() {
+  this._checkModify();
+  this._addSpecial('orderby', {'_id': 1})
+  return this
+}
+
 DBQuery.prototype.last = DBQuery.prototype.tail =
   function(n) {
-    return this.reverse().limit(n || 1)
+    return this.reverse().first(n)
   }
 
 DBQuery.prototype.first = DBQuery.prototype.head =
