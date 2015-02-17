@@ -1,5 +1,4 @@
 # MongoDB Shell Extensions [![Build Status](https://travis-ci.org/gabrielelana/mongodb-shell-extensions.svg?branch=master)](https://travis-ci.org/gabrielelana/mongodb-shell-extensions)
-
 Collection of utilities to make the life inside of the MongoDB shell a little bit easier
 
 # Quick Examples
@@ -273,7 +272,7 @@ The `field` parameter could be an array of fields
 
 <a name="Collection-first" />
 ### `Collection#first(n)`
-Returns the first n (ordered by `_id`) elements inserted in the collection
+Returns the first `n` (ordered by `_id`) elements inserted in the collection
 ```js
 > db.users.first().length()
 1
@@ -283,7 +282,7 @@ Returns the first n (ordered by `_id`) elements inserted in the collection
 
 <a name="Collection-last" />
 ### `Collection#last(n)`
-Returns the last n (ordered by `_id`) elements inserted in the collection
+Returns the last `n` (ordered by `_id`) elements inserted in the collection
 ```js
 > db.users.save({name: "Gabriele", surname: "Lana", job: "Software Craftsman"})
 > db.users.last().pretty()
