@@ -33,6 +33,10 @@ DBQuery.prototype.first = DBQuery.prototype.head =
     return this.limit(n || 1)
   }
 
+DBQuery.prototype.sample = function(n) {
+  return _.sample(this.toArray(), n || 1)
+}
+
 DBQuery.prototype.tojson = function() {
   return tojson(this.toArray())
 }

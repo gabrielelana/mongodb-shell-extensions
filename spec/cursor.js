@@ -77,3 +77,15 @@ assert.that('DBQuery#reverse keeps the original query', function(c) {
   var reversed = query.clone().reverse()
   assert.eq(reversed.count(), 1)
 })
+
+assert.that('DBQuery#sample takes random samples', function(c) {
+  c.save({field: 1})
+  c.save({field: 2})
+  c.save({field: 3})
+  c.save({field: 4})
+  c.save({field: 5})
+
+  assert.eq(1, c.find().sample().length)
+  assert.eq(2, c.find().sample(2).length)
+  assert.eq(0, c.find({field: 10}).sample().length)
+})
