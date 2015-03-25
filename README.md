@@ -84,6 +84,12 @@ ISODate("2014-03-06T11:49:12.383Z")
 ```
 Be mind, we only have scratched the surface of what we can do
 
+# Supported MongoDB Versions
+* `2.2.X`
+* `2.4.X`
+* `2.6.X`
+* `3.0.X`
+
 # How to Install
 Download `mongorc.js` from the latest [release](https://raw.github.com/gabrielelana/mongodb-shell-extensions/master/released/mongorc.js) and copy it into your home directory as `.mongorc`
 ```
