@@ -103,7 +103,8 @@ module.exports = function(grunt) {
   //    --dbpath .tmp/db --logpath .tmp/log --fork
   //    --quiet --nojournal --noprealloc --smallfiles
   //    `
-  // * change the task spec definition to `['spec-on-head:3100']`
+  // * change the definition 'spec-on-head' spec to `['build', 'run-all-specs:head:3100']`
+  // * [optional] to use the shell shipped with the server, change the spawn to use the full path of shell executable
   // * run `grunt spec`
 
   grunt.registerTask('run-all-specs', 'Run all specs in MongoDB Shell', function(onWhat, onPort) {
