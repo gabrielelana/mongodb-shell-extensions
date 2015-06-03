@@ -1,11 +1,19 @@
 language: node_js
 node_js:
   - 0.10
-services:
-  - mongodb
-
+env:
+  - MONGODB_VERSION=2.4.14
+  - MONGODB_VERSION=2.6.10
+  - MONGODB_VERSION=3.0.3
 before_install:
   - npm install --global bower grunt-cli
   - bower --quiet install
+before_script:
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  - echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+  - sudo apt-get update
+  - sudo apt-get install -y mongodb-org=$MONGODB_VERSION mongodb-org-server=$MONGODB_VERSION mongodb-org-shell=$MONGODB_VERSION mongodb-org-mongos=$MONGODB_VERSION mongodb-org-tools=$MONGODB_VERSION
+  - sleep 15
+  - mongo --version
 script:
   - grunt spec-on-head
