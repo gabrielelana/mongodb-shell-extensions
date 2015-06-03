@@ -37,6 +37,9 @@ moment.$inDay = function(aDay) {
   }
 }
 
+Date.prototype.format = function(string) {
+  return moment(this).format(string)
+}
 
 ;(function() {
   moment.last = dateRangeFromIntervalOfTime(function(quantity, interval) {
