@@ -390,6 +390,47 @@ Same as `printcsv()` but called on a query
 <a name="JSONPath" />
 ## `JSONPath Support`
 
+<a name="Query-select" />
+### `Query#select(x)`
+Applies one of more `JSONPath` expression to the current result set, useful when you have nested documents and you are interested only on some nested fields.
+```
+> db.nested.find()
+{
+  "_id" : ObjectId("556f0715fa0cf10f7dff35aa"),
+  "a" : [
+    1,
+    2,
+    3
+  ],
+  "b" : {
+    "c" : 4
+  }
+}
+```
+`x` could be a single `JSONPath` expression or a list of `JSONPath` expressions. Only the fields that matches the expressions are kept in the result set. The selected fields are named after the `JSONPath` expression.
+```
+> db.nested.find().select('a')
+{ "a" : [ 1, 2, 3 ] }
+> db.nested.find().select('a[0]')
+{ "a[0]" : 1 }
+> db.nested.find().select(['a[0]', 'b.c'])
+{ "a[0]" : 1, "b.c" : 4 }
+```
+`x` could be an hash where the values are `JSONPath` expressions and the related keys are the names that will be used to name the selected fields.
+```
+> db.nested.find().select({'a': 'a[0]', 'b': 'b.c'})
+{ "a" : 1, "b" : 4 }
+```
+
+<a name="Query-select" />
+### `jsonpath(o, x)`
+Applies a `JSONPath` expression `x` on an arbitrary object `o`, useful to test a `JSONPath` expression before using it in `Query#select(x)`
+```
+> o = {a: [1, 2, 3], b: {c: 4}}
+> jsonpath(o, 'a[0]')
+1
+```
+
 
 
 <a name="TemporaryCollections" />
