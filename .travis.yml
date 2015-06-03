@@ -16,7 +16,7 @@ before_script:
   - sudo apt-get install -y $MONGODB_PACKAGE
   - sudo service mongodb restart || true
   - sleep 15
-  - cat /var/log/mongodb/mongod.log
+  - cat /var/log/mongodb/mongod*.log
   - mongo --version
 script:
   - grunt spec-on-head
