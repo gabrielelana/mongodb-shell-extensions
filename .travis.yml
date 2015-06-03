@@ -14,8 +14,8 @@ before_script:
   - echo "deb http://repo.mongodb.org/apt/ubuntu `lsb_release -sc`/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb_org.list
   - sudo apt-get update
   - sudo apt-get install -y $MONGODB_PACKAGE
+  - sudo service mongodb start || true
   - sleep 15
-  - cat /var/log/mongodb/mongodb.log
   - mongo --version
 script:
   - grunt spec-on-head
