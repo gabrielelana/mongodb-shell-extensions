@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - 0.10
 env:
-  - MONGODB_PACKAGE='mongodb-10gen=2.4.14'
   - MONGODB_PACKAGE='mongodb-org=2.6.10'
   - MONGODB_PACKAGE='mongodb-org=3.0.3'
 before_install:
@@ -10,13 +9,10 @@ before_install:
   - bower --quiet install
 before_script:
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-  - echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb_10gen.list
   - echo "deb http://repo.mongodb.org/apt/ubuntu `lsb_release -sc`/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb_org.list
   - sudo apt-get update
   - sudo apt-get install -y $MONGODB_PACKAGE
-  - sudo service mongodb restart || true
   - sleep 15
-  - cat /var/log/mongodb/mongod*.log
   - mongo --version
 script:
   - grunt spec-on-head
