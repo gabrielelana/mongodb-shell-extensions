@@ -3,7 +3,7 @@ Collection of utilities to make the life inside of the MongoDB shell a little bi
 
 # Quick Examples
 You have a collection `visits` like that
-```js
+```
 > db.visits.findOne()
 {
   "_id" : "a0039342e1cda7446cbb55aac2108491-20140306",
@@ -15,7 +15,7 @@ You have a collection `visits` like that
 }
 ```
 You need to find how many visits there have been in the last 10 day... You know that dealing with dates is a mess, unless you have loaded the mighty `MongoDB Shell Extensions` in that case your life would be much, much easier
-```js
+```
 > moment.last(10).days().forEach('day', function(m) {
 >   print(m.format('YYYYDDMM') + ': ' + db.visits.count({at: moment.$inDay(m)}))
 > })
@@ -33,14 +33,14 @@ You need to find how many visits there have been in the last 10 day... You know 
 20140306: 204
 ```
 You will have helpful output
-```js
+```
 > moment.last(10)
 10 of what?
 > moment.last(10).days()
 "2014-02-24T11:36:50.509Z/2014-03-06T11:36:50.509Z"
 ```
 You will have various helpful methods to reduce query verbosity
-```js
+```
 // Suppose we have a day d
 > d
 ISODate("2014-03-06T11:49:12.383Z")
@@ -239,7 +239,7 @@ Alias for `rs.slaveOk()` nothing fancy, I was just tired of typing it
 <a name="DB-getCollections" />
 ### `DB#getCollections()`
 Returns an array of all collection instances
-```js
+```
 > db.getCollections().map(function(c) {return c.count()})
 [ 5793, 4, 1003, 4373 ]
 ```
@@ -247,7 +247,7 @@ Returns an array of all collection instances
 <a name="Collection-distinctAndCount" />
 ### `Collection#distinctAndCount(field, query)`
 For each distinct value of `field` counts the occurrences in documents optionally filtered by `query`
-```js
+```
 > db.users.distinctAndCount('name', {name: /^a/i})
 {
   "Abagail": 1,
@@ -262,7 +262,7 @@ For each distinct value of `field` counts the occurrences in documents optionall
 }
 ```
 The `field` parameter could be an array of fields
-```js
+```
 > db.users.distinctAndCount(['name','job'], {name: /^a/i})
 {
   "Austin,Educator" : 1,
@@ -279,7 +279,7 @@ The `field` parameter could be an array of fields
 <a name="Collection-first" />
 ### `Collection#first(n)`
 Returns the first `n` (ordered by `_id`) elements inserted in the collection
-```js
+```
 > db.users.first().length()
 1
 > db.users.first(3).length()
@@ -289,7 +289,7 @@ Returns the first `n` (ordered by `_id`) elements inserted in the collection
 <a name="Collection-last" />
 ### `Collection#last(n)`
 Returns the last `n` (ordered by `_id`) elements inserted in the collection
-```js
+```
 > db.users.save({name: "Gabriele", surname: "Lana", job: "Software Craftsman"})
 > db.users.last().pretty()
 {
@@ -311,7 +311,7 @@ Same as [`Collection#last()`](#Collection-last)
 <a name="Query-reverse" />
 ### `Query#reverse()`
 Reverse the order of the cursor
-```js
+```
 > db.users.first()._id === db.users.find().reverse().last()._id
 true
 ```
@@ -327,7 +327,7 @@ true
 <a name="tocsv" />
 ### `tocsv(x)`
 Returns a `CSV` instance which is a collections of lines. The first line is the CSV header with the union of all the fields found in all the documents. The other lines are the CSV representation of the documents, one document per line. `CSV` inherits most of the collection methods implemented in `LoDash`
-```js
+```
 > tocsv(db.users.find({name: /^a/i}))
 _id,name,surname,job
 "5318565aca4f6f419b00001e","Abagail","Crona","Zoologist"
@@ -343,7 +343,7 @@ _id,name,surname,job
 ...
 ```
 This is the same result of `printcsv` but don't be fooled, the shell calls `shellPrint()` method on every object that needs to be displayed by the shell itself, `shellPrint()` will print the `CSV` instance exactly as `printjson` would but you can do other things beside printing it
-```js
+```
 > tocsv(db.users.find({name: /^a/i})).head()
 _id,name,surname,job
 // sample will return a random line
@@ -351,7 +351,7 @@ _id,name,surname,job
 "5318565aca4f6f419b000098","Arlo","Huels","Lawyer"
 ```
 It will work with everything has a `map` method
-```js
+```
 > tocsv([{name: "Gabriele", surname: "Lana"}])
 name,surname
 "Gabriele","Lana"
@@ -370,7 +370,7 @@ $ mongo db-with-users --quiet ~/.mongorc.js ./exportUsersToCSV.js | tail -n +3 >
 <a name="Query-tocsv" />
 ### `Query#tocsv()`
 Same as `tocsv()` but called on a query
-```js
+```
 > db.users.find().tocsv()
 // It's the same as
 > tocsv(db.users.find())
@@ -379,7 +379,7 @@ Same as `tocsv()` but called on a query
 <a name="Query-printcsv" />
 ### `Query#printcsv()`
 Same as `printcsv()` but called on a query
-```js
+```
 > db.users.find().printcsv()
 // It's the same as
 > printcsv(db.users.find())
