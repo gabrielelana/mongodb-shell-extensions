@@ -176,4 +176,4 @@ Date.prototype.format = function(string) {
     return '"' + this.toString() + '"'
   }
 
-})(moment().range().constructor)
+})(moment().range(moment.now(), moment.now()).constructor)

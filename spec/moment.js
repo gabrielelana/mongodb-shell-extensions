@@ -21,7 +21,7 @@ assert.that('moment.$in requires a date range', function(c) {
     moment.$in(moment())
   }, [], 'a Moment should not be accepted as date range')
   assert.doesNotThrow(function() {
-    moment.$in(moment().range())
+    moment.$in(moment().range(moment.now(), moment.now()))
   }, [], 'a DateRange should be accepted as date range')
 })
 
