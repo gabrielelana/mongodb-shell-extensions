@@ -1,6 +1,8 @@
 # MongoDB Shell Extensions [![Build Status](https://travis-ci.org/gabrielelana/mongodb-shell-extensions.svg?branch=master)](https://travis-ci.org/gabrielelana/mongodb-shell-extensions)
 Collection of utilities to make the life inside of the MongoDB shell a little bit easier
 
+## Works for MongoDB: 2.4.X, 2.6.X and 3.0.X
+
 # Quick Examples
 You have a collection `visits` like that
 ```
