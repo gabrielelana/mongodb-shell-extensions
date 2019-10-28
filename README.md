@@ -170,7 +170,9 @@ Sorry, this is a work in progress, in the meantime, if you don't find what you a
 * [`MomentJS Integration`](#MomentJS)
 
 <a name="Command-Pretty" />
+
 ### `command pretty`
+
 Switch shell to pretty printing mode. Everything that could be pretty printed it will be automatically without asking for it
 ```
 > db.users.first()
@@ -194,7 +196,9 @@ pretty printing: enabled
 ```
 
 <a name="Command-Ugly" />
+
 ### `command ugly`
+
 Switch shell off from pretty printing mode
 ```
 > db.users.first()
@@ -211,7 +215,9 @@ pretty printing: disabled
 ```
 
 <a name="Command-ListDatabases" />
+
 ### `command d|dbs|databases`
+
 List all databases and storage data. The format is NUMBER_OF_COLLECTIONS/SIZE_ON_DISK
 ```
 > d
@@ -224,7 +230,9 @@ hangman                         2/208MB
 ```
 
 <a name="Command-ListCollections" />
+
 ### `command d|dbs|databases`
+
 List all collections and storage data. The format is NUMBER_OF_DOCUMENTS/SIZE_ON_DISK
 ```
 > c
@@ -235,11 +243,15 @@ system.indexes                  3/4KB
 ```
 
 <a name="Command-SlaveOk" />
+
 ### `command so`
+
 Alias for `rs.slaveOk()` nothing fancy, I was just tired of typing it
 
 <a name="DB-getCollections" />
+
 ### `DB#getCollections()`
+
 Returns an array of all collection instances
 ```
 > db.getCollections().map(function(c) {return c.count()})
@@ -247,7 +259,9 @@ Returns an array of all collection instances
 ```
 
 <a name="Collection-distinctAndCount" />
+
 ### `Collection#distinctAndCount(field, query)`
+
 For each distinct value of `field` counts the occurrences in documents optionally filtered by `query`
 ```
 > db.users.distinctAndCount('name', {name: /^a/i})
@@ -279,7 +293,9 @@ The `field` parameter could be an array of fields
 ```
 
 <a name="Collection-first" />
+
 ### `Collection#first(n)`
+
 Returns the first `n` (ordered by `_id`) elements inserted in the collection
 ```
 > db.users.first().length()
@@ -289,7 +305,9 @@ Returns the first `n` (ordered by `_id`) elements inserted in the collection
 ```
 
 <a name="Collection-last" />
+
 ### `Collection#last(n)`
+
 Returns the last `n` (ordered by `_id`) elements inserted in the collection
 ```
 > db.users.save({name: "Gabriele", surname: "Lana", job: "Software Craftsman"})
@@ -303,14 +321,19 @@ Returns the last `n` (ordered by `_id`) elements inserted in the collection
 ```
 
 <a name="Query-first" />
+
 ### `Query#first()`
+
 Same as [`Collection#first()`](#Collection-first)
 
 <a name="Query-last" />
+
 ### `Query#last()`
+
 Same as [`Collection#last()`](#Collection-last)
 
 <a name="Query-reverse" />
+
 ### `Query#reverse()`
 Reverse the order of the cursor
 ```
@@ -319,15 +342,19 @@ true
 ```
 
 <a name="Query-tojson" />
+
 ### `Query#tojson()`
 
 
 
 <a name="CSV" />
+
 ## `CSV`
 
 <a name="tocsv" />
+
 ### `tocsv(x)`
+
 Returns a `CSV` instance which is a collections of lines. The first line is the CSV header with the union of all the fields found in all the documents. The other lines are the CSV representation of the documents, one document per line. `CSV` inherits most of the collection methods implemented in `LoDash`
 ```
 > tocsv(db.users.find({name: /^a/i}))
@@ -360,7 +387,9 @@ name,surname
 ```
 
 <a name="printcsv" />
+
 ### `printcsv(x)`
+
 It will print each line of the CSV returned by `tocsv()`. This is useful when you want to export redirecting the output. Unfortunately `--eval` option will be evaluated **before** any script so it cannot be used to execute something defined in your `~/.mongorc.js`
 ```
 $ cat > exportUsersToCSV.js <<SCRIPT
@@ -370,7 +399,9 @@ $ mongo db-with-users --quiet ~/.mongorc.js ./exportUsersToCSV.js | tail -n +3 >
 ```
 
 <a name="Query-tocsv" />
+
 ### `Query#tocsv()`
+
 Same as `tocsv()` but called on a query
 ```
 > db.users.find().tocsv()
@@ -379,8 +410,11 @@ Same as `tocsv()` but called on a query
 ```
 
 <a name="Query-printcsv" />
+
 ### `Query#printcsv()`
+
 Same as `printcsv()` but called on a query
+
 ```
 > db.users.find().printcsv()
 // It's the same as
@@ -390,10 +424,14 @@ Same as `printcsv()` but called on a query
 
 
 <a name="JSONPath" />
-## `JSONPath Support`
+
+### `JSONPath Support`
+
 
 <a name="Query-select" />
+
 ### `Query#select(x)`
+
 Applies one of more `JSONPath` expression to the current result set, useful when you have nested documents and you are interested only on some nested fields.
 ```
 > db.nested.find()
@@ -425,7 +463,9 @@ Applies one of more `JSONPath` expression to the current result set, useful when
 ```
 
 <a name="Query-select" />
+
 ### `jsonpath(o, x)`
+
 Applies a `JSONPath` expression `x` on an arbitrary object `o`, useful to test a `JSONPath` expression before using it in `Query#select(x)`
 ```
 > o = {a: [1, 2, 3], b: {c: 4}}
@@ -436,19 +476,24 @@ Applies a `JSONPath` expression `x` on an arbitrary object `o`, useful to test a
 
 
 <a name="TemporaryCollections" />
+
 ## `Temporary Collections`
 
 
 
+
 <a name="StorableCursors" />
+
 ## `Storable Cursors`
 
 
 
 <a name="LoDash" />
+
 ## `LoDash Integration`
 
 
 
 <a name="MomentJS" />
+
 ## `MomentJS Integration`
