@@ -41,6 +41,6 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-attention": "^0.0.5",
-    "semver": "^3.0.1"
+    "semver": "^6.3.0"
   }
 }
