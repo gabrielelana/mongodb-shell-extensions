@@ -1,3 +1,23 @@
+# Release 0.3.0
+* Update `lodash` to ^4.17
+
+# Release 0.2.9
+* Update `moment` to ~2.10
+* Add `moment-timezone`
+
+# Release 0.2.8
+* command `d` to list databases
+* command `c` to list collections
+* command `pretty` to switch to pretty print mode
+* command `ugly` to switch off from pretty print mode
+* command `so` to enable read on slave nodes
+
+# Release 0.2.7
+* `DBCollection.distinctAndCount` on null fields
+
+# Release 0.2.6
+* `DBQuery#reverse` more robust and compatible with 0.2.2, 0.2.4 and 0.2.6
+
 # Release 0.2.5
 * `DBCollection.distinctAndCount` on array fields
 * `DBCollection.distinctAndCount` on primitive like (ex. `Number`, `ISODate`, …) fields
